@@ -5,20 +5,20 @@ import { MonitorPlay, ChevronDown, ShieldCheck, Globe, Zap } from "lucide-react"
 
 const faqs = [
   {
-    question: "What is QwevoTV?",
-    answer: "QwevoTV is a next-generation IPTV streaming service providing over 25,000 live channels, premium sports, and a massive library of 120,000+ movies and series in 4K/8K quality."
+    question: "What is qwevo tv?",
+    answer: "qwevo tv is a next-generation IPTV streaming service providing over 25,000 live channels, premium sports, and a massive library of 120,000+ movies and series in 4K/8K quality."
   },
   {
-    question: "Which devices are compatible with QwevoTV?",
-    answer: "QwevoTV works seamlessly on all devices including Smart TVs (Samsung, LG, Android), Firestick, Apple TV, Mag Boxes, Smartphones (iOS/Android), and PC."
+    question: "Which devices are compatible with qwevo tv?",
+    answer: "qwevo tv works seamlessly on all devices including Smart TVs (Samsung, LG, Android), Firestick, Apple TV, Mag Boxes, Smartphones (iOS/Android), and PC."
   },
   {
     question: "How fast is the activation?",
-    answer: "We offer instant activation. Once your order is confirmed, you will receive your QwevoTV login credentials via WhatsApp or Email within 5-15 minutes."
+    answer: "We offer instant activation. Once your order is confirmed, you will receive your qwevo tv login credentials via WhatsApp or Email within 5-15 minutes."
   },
   {
-    question: "Can I watch live sports on QwevoTV?",
-    answer: "Absolutely! QwevoTV provides access to all major sports networks in Ultra HD, including football, basketball, UFC, and more, with no buffering."
+    question: "Can I watch live sports on qwevo tv?",
+    answer: "Absolutely! qwevo tv provides access to all major sports networks in Ultra HD, including football, basketball, UFC, and more, with no buffering."
   },
   {
     question: "Do you offer a refund policy?",
@@ -40,7 +40,7 @@ export default function Footer() {
             <h2 className="text-4xl md:text-6xl font-black text-white italic uppercase tracking-tighter mb-4">
               QUESTIONS? <span className="text-primary italic">ANSWERS.</span>
             </h2>
-            <p className="text-text-muted font-medium uppercase tracking-[0.2em] text-xs">Everything you need to know about QwevoTV</p>
+            <p className="text-text-muted font-medium uppercase tracking-[0.2em] text-xs">Everything you need to know about qwevo tv</p>
           </div>
 
           <div className="space-y-4">
@@ -100,7 +100,7 @@ export default function Footer() {
                 <a href="#" className="hover:text-primary transition-colors">Refund Policy</a>
               </div>
               <div className="text-text-muted text-[10px] uppercase font-black tracking-widest">
-                © {new Date().getFullYear()} QwevoTV Platform. All rights reserved.
+                © {new Date().getFullYear()} qwevo tv Platform. All rights reserved.
               </div>
             </div>
 
@@ -117,7 +117,7 @@ export default function Footer() {
 
           <div className="mt-16 pt-8 border-t border-white/5 text-center">
             <p className="text-white/20 text-[10px] leading-relaxed max-w-5xl mx-auto uppercase tracking-tighter">
-              QwevoTV is an independent streaming provider. We do not host any content on our servers. All logos and brands are property of their respective owners. QwevoTV is designed to provide the best 4K streaming experience with 99.9% uptime.
+              qwevo tv is an independent streaming provider. We do not host any content on our servers. All logos and brands are property of their respective owners. qwevo tv is designed to provide the best 4K streaming experience with 99.9% uptime.
             </p>
           </div>
         </div>

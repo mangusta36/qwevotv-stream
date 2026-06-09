@@ -6,19 +6,19 @@ import Footer from "@/components/layout/Footer";
 export default function SupportPage() {
   const faqs = [
     {
-      q: "how long does it take to activate my qwevotv account?",
+      q: "how long does it take to activate my qwevo tv account?",
       a: "activation is usually instant. you will receive your credentials via whatsapp within 5 to 15 minutes after payment."
     },
     {
-      q: "which devices does qwevotv support?",
+      q: "which devices does qwevo tv support?",
       a: "we support all 2026 devices: smart tvs, firestick, android boxes, mag, pc, and all smartphones."
     },
     {
       q: "do you offer a refund if the service doesn't work?",
-      a: "yes, qwevotv offers a 7-day money-back guarantee for any technical issues we cannot solve."
+      a: "yes, qwevo tv offers a 7-day money-back guarantee for any technical issues we cannot solve."
     },
     {
-      q: "can i use qwevotv on multiple devices?",
+      q: "can i use qwevo tv on multiple devices?",
       a: "standard plans are for 1 device. contact our whatsapp support for special multi-room discounts."
     }
   ];
@@ -35,14 +35,14 @@ export default function SupportPage() {
           
           <div className="inline-flex items-center gap-2 bg-green-500/10 border border-green-500/20 px-5 py-2 rounded-full mb-10">
             <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-            <span className="text-green-500 text-[10px] font-bold tracking-widest">qwevotv servers: online</span>
+            <span className="text-green-500 text-[10px] font-bold tracking-widest">qwevo tv servers: online</span>
           </div>
 
           <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-8 leading-none italic">
-            qwevotv <span className="text-primary not-italic text-6xl md:text-8xl">support</span>.
+            qwevo tv <span className="text-primary not-italic text-6xl md:text-8xl">support</span>.
           </h1>
           <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto font-medium italic lowercase">
-            need help with your qwevotv subscription? our technical team is available 24/7 on whatsapp.
+            need help with your qwevo tv subscription? our technical team is available 24/7 on whatsapp.
           </p>
         </div>
 
@@ -74,7 +74,7 @@ export default function SupportPage() {
                 <HelpCircle size={35} className="text-white" />
              </div>
              <h3 className="text-3xl font-black mb-4 italic lowercase">setup guides</h3>
-             <p className="text-gray-400 text-base mb-10 leading-relaxed font-medium">step-by-step tutorials for qwevotv on all devices (smart tv, firestick, etc).</p>
+             <p className="text-gray-400 text-base mb-10 leading-relaxed font-medium">step-by-step tutorials for qwevo tv on all devices (smart tv, firestick, etc).</p>
              <div className="flex items-center gap-3 text-primary font-bold text-sm tracking-widest uppercase group-hover:gap-6 transition-all">
                view all guides <ExternalLink size={16} />
              </div>
@@ -84,7 +84,7 @@ export default function SupportPage() {
         {/* --- FAQ Section --- */}
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-black mb-6 italic tracking-tighter">qwevotv <span className="text-primary italic">faq</span></h2>
+            <h2 className="text-4xl md:text-5xl font-black mb-6 italic tracking-tighter">qwevo tv <span className="text-primary italic">faq</span></h2>
             <div className="w-24 h-1.5 bg-primary mx-auto rounded-full" />
           </div>
 
@@ -109,7 +109,7 @@ export default function SupportPage() {
         <div className="mt-32 flex flex-col items-center">
             <div className="flex items-center gap-4 bg-white/5 px-10 py-5 rounded-full border border-white/10">
               <ShieldCheck className="text-primary" size={24} />
-              <span className="text-[11px] font-bold tracking-[0.4em] text-gray-400 lowercase">qwevotv secure support</span>
+              <span className="text-[11px] font-bold tracking-[0.4em] text-gray-400 lowercase">qwevo tv secure support</span>
             </div>
         </div>
 

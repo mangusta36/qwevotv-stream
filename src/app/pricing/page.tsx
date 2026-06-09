@@ -51,7 +51,7 @@ export default function PricingPage() {
               PREMIUM <span className="text-primary not-italic">PLANS.</span>
             </h1>
             <p className="text-text-muted text-lg max-w-2xl mx-auto font-light">
-              Choose your pass to the future of entertainment. No hidden fees, cancel anytime via <span className="text-white font-bold">QwevoTV</span> Support.
+              Choose your pass to the future of entertainment. No hidden fees, cancel anytime via <span className="text-white font-bold">qwevo tv</span> Support.
             </p>
           </motion.div>
         </div>

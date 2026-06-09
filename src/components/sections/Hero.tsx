@@ -10,7 +10,7 @@ export default function Hero() {
       <div className="absolute inset-0 z-0">
         <Image 
           src="https://images.unsplash.com/photo-1574267432553-4b4628081c31?q=80&w=2000" 
-          alt="qwevotv cinema"
+          alt="qwevo tv cinema"
           fill
           priority
           className="object-cover opacity-40"
@@ -30,7 +30,7 @@ export default function Hero() {
             animate={{ opacity: 1, x: 0 }}
             className="text-6xl md:text-8xl font-black lowercase italic leading-[0.8] tracking-tighter"
           >
-            <span className="text-transparent bg-clip-text bg-qwevo-glow">qwevotv</span><br/>
+            <span className="text-transparent bg-clip-text bg-qwevo-glow">qwevo tv</span><br/>
             <span className="text-white not-italic font-black text-4xl md:text-7xl">streaming service.</span>
           </motion.h1>
 

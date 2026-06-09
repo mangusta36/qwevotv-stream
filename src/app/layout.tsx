@@ -18,22 +18,22 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.qwevotv.com'), 
+  metadataBase: new URL('https://www.qwevo tv.com'), 
   
   title: {
-    default: "QwevoTV | Premium 4K Streaming & Ultimate IPTV Experience",
-    template: "%s | QwevoTV"
+    default: "qwevo tv | Premium 4K Streaming & Ultimate IPTV Experience",
+    template: "%s | qwevo tv"
   },
   
   description:
-    "Experience the future of television with QwevoTV. Access 25,000+ global channels, latest movies, and live sports in Ultra HD 4K. Fast, reliable, and 24/7 support.",
+    "Experience the future of television with qwevo tv. Access 25,000+ global channels, latest movies, and live sports in Ultra HD 4K. Fast, reliable, and 24/7 support.",
 
   alternates: {
-    canonical: 'https://www.qwevotv.com', // Rej3naha absolute bach Google i7sebha s7i7a 100%
+    canonical: 'https://www.qwevo tv.com', // Rej3naha absolute bach Google i7sebha s7i7a 100%
   },
 
   keywords: [
-    "QwevoTV",
+    "qwevo tv",
     "Qwevo TV Streaming",
     "Premium IPTV 2025",
     "4K Live Sports",
@@ -45,16 +45,16 @@ export const metadata: Metadata = {
 
   // OpenGraph (SEO Social Media)
   openGraph: {
-    title: "QwevoTV | Ultimate 4K Streaming Experience",
-    description: "Join QwevoTV and watch 25,000+ live channels and VOD in 4K quality.",
-    url: "https://www.qwevotv.com", 
-    siteName: "QwevoTV",
+    title: "qwevo tv | Ultimate 4K Streaming Experience",
+    description: "Join qwevo tv and watch 25,000+ live channels and VOD in 4K quality.",
+    url: "https://www.qwevo tv.com", 
+    siteName: "qwevo tv",
     images: [
       {
         url: "/og-image.jpg", 
         width: 1200,
         height: 630,
-        alt: "QwevoTV - Premium Entertainment",
+        alt: "qwevo tv - Premium Entertainment",
       },
     ],
     locale: "en_US",
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
   // Twitter SEO
   twitter: {
     card: "summary_large_image",
-    title: "QwevoTV | Watch Live TV in 4K",
+    title: "qwevo tv | Watch Live TV in 4K",
     description: "The best streaming platform with instant activation and global coverage.",
     images: ["/og-image.jpg"],
   },

@@ -34,7 +34,7 @@ export default function BlogPostDetail() {
         {/* Navigation Back */}
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
           <Link href="/blog" className="group text-primary flex items-center gap-2 mb-12 font-black text-[10px] uppercase tracking-[0.3em] hover:text-white transition-colors">
-            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Back to qwevotv blog
+            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Back to qwevo tv blog
           </Link>
         </motion.div>
 
@@ -83,7 +83,7 @@ export default function BlogPostDetail() {
         <div className="mt-24 pt-12 border-t border-white/5 text-center">
             <p className="text-white/40 text-xs font-black uppercase tracking-[0.4em] mb-8 italic">Ready to join the revolution?</p>
             <Link href="/#pricing" className="bg-primary text-white px-12 py-5 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-white hover:text-black transition-all shadow-xl shadow-primary/20">
-              Get Started with qwevotv
+              Get Started with qwevo tv
             </Link>
         </div>
 

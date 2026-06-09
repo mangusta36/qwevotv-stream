@@ -12,7 +12,7 @@ export default function BlogPage() {
     <main className="bg-background min-h-screen text-white font-sans selection:bg-primary selection:text-white">
       <Navbar />
 
-      {/* Hero Section - Updated for qwevotv */}
+      {/* Hero Section - Updated for qwevo tv */}
       <section className="pt-48 pb-24 px-6 relative overflow-hidden">
         {/* Glow Orange behind title */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/10 blur-[130px] rounded-full -z-10" />
@@ -21,7 +21,7 @@ export default function BlogPage() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <span className="text-primary font-black tracking-[0.3em] text-xs uppercase mb-4 block">Information Hub</span>
             <h1 className="text-6xl md:text-8xl font-black italic uppercase tracking-tighter mb-8 leading-none">
-              QWEVOTV <span className="text-transparent bg-clip-text bg-qwevo-glow not-italic">INSIGHTS</span>
+              qwevo tv <span className="text-transparent bg-clip-text bg-qwevo-glow not-italic">INSIGHTS</span>
             </h1>
             <p className="text-text-muted text-lg md:text-xl max-w-3xl mx-auto leading-relaxed italic text-balance">
               The world's most comprehensive guides for <span className="text-white font-bold underline decoration-primary underline-offset-4">Ultra-HD Streaming</span> and next-gen IPTV technology.

@@ -34,7 +34,7 @@ export default function MoviesCarousel() {
             <span className="text-transparent bg-clip-text bg-qwevo-glow italic">SPORTS, AND MORE.</span>
           </h2>
           <p className="text-text-muted max-w-2xl mx-auto text-lg md:text-xl font-light italic leading-relaxed">
-            Dive into <span className="text-white font-bold">qwevotv</span> massive library. From 4K blockbusters to worldwide live sports events.
+            Dive into <span className="text-white font-bold">qwevo tv</span> massive library. From 4K blockbusters to worldwide live sports events.
           </p>
         </motion.div>
       </div>
@@ -58,7 +58,7 @@ export default function MoviesCarousel() {
             >
               <img 
                 src={movie.img} 
-                alt={`qwevotv movie ${movie.id}`} 
+                alt={`qwevo tv movie ${movie.id}`} 
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out grayscale-[30%] group-hover:grayscale-0"
                 loading="lazy"
               />
@@ -80,7 +80,7 @@ export default function MoviesCarousel() {
       {/* CTA Line ta7t l-carousel */}
       <div className="text-center mt-12 relative z-10">
          <p className="text-[10px] font-black tracking-[0.4em] uppercase text-white/20">
-           New titles added daily to qwevotv library
+           New titles added daily to qwevo tv library
          </p>
       </div>
     </section>

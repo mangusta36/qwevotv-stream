@@ -10,7 +10,7 @@ export default function Navbar() {
     <header className="w-full fixed top-0 z-[100] py-4 px-6 md:px-12">
       <nav className="max-w-7xl mx-auto flex justify-between items-center bg-surface/60 backdrop-blur-2xl border border-white/10 px-8 py-4 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
         
-        {/* Logo QwevoTV */}
+        {/* Logo qwevo tv */}
         <Link href="/" className="flex items-center gap-2 group cursor-pointer">
           <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center group-hover:rotate-12 transition-all duration-500 shadow-lg shadow-primary/30">
             <Zap size={22} className="text-white fill-white" />

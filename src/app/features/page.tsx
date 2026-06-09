@@ -5,7 +5,7 @@ import Footer from "@/components/layout/Footer";
 import { motion } from "framer-motion";
 
 export default function FeaturesPage() {
-  const WHATSAPP_URL = "https://wa.me/447828714977?text=Hello QwevoTV! I want to know more about the features.";
+  const WHATSAPP_URL = "https://wa.me/447828714977?text=Hello qwevo tv! I want to know more about the features.";
 
   return (
     <main className="min-h-screen bg-background text-text-main overflow-hidden selection:bg-primary selection:text-white">
@@ -37,7 +37,7 @@ export default function FeaturesPage() {
             <span className="text-transparent bg-clip-text bg-qwevo-glow italic">PURE SPEED.</span>
           </h1>
           <p className="text-text-muted max-w-2xl mx-auto text-lg md:text-xl font-light leading-relaxed italic">
-            We’ve engineered a streaming architecture that eliminates buffering. <span className="text-white font-bold">QwevoTV</span> uses dedicated 10Gbps nodes for a lag-free 4K experience.
+            We’ve engineered a streaming architecture that eliminates buffering. <span className="text-white font-bold">qwevo tv</span> uses dedicated 10Gbps nodes for a lag-free 4K experience.
           </p>
         </motion.div>
       </div>
@@ -51,7 +51,7 @@ export default function FeaturesPage() {
             </div>
             <h3 className="text-4xl lg:text-5xl font-black mb-6 tracking-tight italic uppercase text-white">True 8K <br /> Ready.</h3>
             <p className="text-text-muted max-w-sm text-lg leading-relaxed group-hover:text-gray-200 transition-colors">
-              QwevoTV isn't just 4K. We support AV1 encoding for <span className="text-primary font-bold">8K Ultra HD</span> streaming on supported live events and movies.
+              qwevo tv isn't just 4K. We support AV1 encoding for <span className="text-primary font-bold">8K Ultra HD</span> streaming on supported live events and movies.
             </p>
           </div>
           <Play className="absolute bottom-[-20px] right-[-20px] w-64 h-64 text-white/[0.02] -rotate-12" />
@@ -64,7 +64,7 @@ export default function FeaturesPage() {
             </div>
             <h3 className="text-4xl font-black mb-6 tracking-tight italic uppercase text-white">Hyper <br /> Servers.</h3>
             <p className="text-text-muted text-lg leading-relaxed group-hover:text-gray-200 transition-colors">
-              Smart-routing technology by <span className="text-primary font-bold">QwevoTV</span> that automatically connects you to the closest server node.
+              Smart-routing technology by <span className="text-primary font-bold">qwevo tv</span> that automatically connects you to the closest server node.
             </p>
           </div>
         </div>
