@@ -18,7 +18,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.qwevo tv.com'), 
+  metadataBase: new URL('https://www.qwevotv.com'), 
   
   title: {
     default: "qwevo tv | Premium 4K Streaming & Ultimate IPTV Experience",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     "Experience the future of television with qwevo tv. Access 25,000+ global channels, latest movies, and live sports in Ultra HD 4K. Fast, reliable, and 24/7 support.",
 
   alternates: {
-    canonical: 'https://www.qwevo tv.com', // Rej3naha absolute bach Google i7sebha s7i7a 100%
+    canonical: 'https://www.qwevotv.com', // Rej3naha absolute bach Google i7sebha s7i7a 100%
   },
 
   keywords: [
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "qwevo tv | Ultimate 4K Streaming Experience",
     description: "Join qwevo tv and watch 25,000+ live channels and VOD in 4K quality.",
-    url: "https://www.qwevo tv.com", 
+    url: "https://www.qwevotv.com", 
     siteName: "qwevo tv",
     images: [
       {
