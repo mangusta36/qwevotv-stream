@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root { scroll-behavior: smooth; }
+  body {
+    background-color: #000000;
+    color: #ffffff;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* Scrollbar Orange */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #000000; }
+::-webkit-scrollbar-thumb {
+  background: #FF4D00;
+  border-radius: 10px;
+}
+
+/* Selection Orange */
+::selection {
+  background-color: #FF4D00;
+  color: #ffffff;
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-white/[0.03] backdrop-blur-2xl border border-white/10 shadow-2xl;
+  }
+}
+
+section { scroll-margin-top: 100px; }
