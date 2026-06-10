@@ -5,16 +5,10 @@ import Image from "next/image";
 
 export default function Hero() {
   
-  // دالة فتح الواتساب مع الرسالة المطلوبة
-  const handleFreeTrialClick = () => {
-    const phoneNumber = "447828714977";
-    
-    // النص الذي سيظهر للمستخدم (تم تعديله بناءً على طلبك)
-    const message = "Hello, I'm interested in the Free Trial. (qwevo tv)";
-    
-    const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, "_blank");
-  };
+  // إعداد رابط الواتساب مسبقاً
+  const phoneNumber = "447828714977";
+  const message = "Hello, I'm interested in the Free Trial. (qwevo tv)";
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
   return (
     <section className="relative h-screen min-h-[700px] w-full flex items-center bg-black overflow-hidden">
@@ -34,7 +28,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pt-10">
+      <div className="relative z-20 max-w-7xl mx-auto px-6 w-full pt-10"> {/* تم رفع z-index هنا إلى 20 لضمان أنه فوق كل شيء */}
         <div className="max-w-3xl text-left space-y-8">
           
           {/* Release Label */}
@@ -59,13 +53,15 @@ export default function Hero() {
           </motion.p>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            {/* Button with the specific WhatsApp Message */}
-            <button 
-              onClick={handleFreeTrialClick}
+            {/* التعديل هنا: تحويل الزر إلى رابط <a> لضمان العمل 100% */}
+            <a 
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-10 py-5 bg-primary text-white rounded-2xl font-black uppercase text-xs flex items-center justify-center gap-3 shadow-xl shadow-primary/20 hover:scale-105 transition-transform cursor-pointer"
             >
               <Play size={18} fill="white" /> GET FREE TRIAL
-            </button>
+            </a>
             
             <a 
               href="#pricing" 
@@ -77,7 +73,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* CSS Animation to keep performance high */}
       <style jsx>{`
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(10px); }
@@ -87,4 +82,3 @@ export default function Hero() {
     </section>
   );
 }
-
