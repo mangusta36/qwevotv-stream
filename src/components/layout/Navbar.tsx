@@ -6,6 +6,9 @@ import { useState } from "react";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
+  // الرابط الجديد مع الميساج
+  const whatsappUrl = "https://wa.me/447828714977?text=Hello.%20(qwevo%20tv)";
+
   return (
     <header className="w-full fixed top-0 z-[100] py-4 px-6 md:px-12">
       <nav className="max-w-7xl mx-auto flex justify-between items-center bg-surface/60 backdrop-blur-2xl border border-white/10 px-8 py-4 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
@@ -20,7 +23,7 @@ export default function Navbar() {
           </span>
         </Link>
         
-        {/* Links dialek kamlin - Reje3na Features, Pricing, Blog, Support */}
+        {/* Links dialek kamlin */}
         <div className="hidden lg:flex gap-8 text-[13px] font-extrabold text-white/80">
           <Link href="/" className="hover:text-primary transition-colors uppercase tracking-[0.15em]">Home</Link>
           <Link href="/features" className="hover:text-primary transition-colors uppercase tracking-[0.15em]">Features</Link>
@@ -32,8 +35,9 @@ export default function Navbar() {
         {/* WhatsApp Button */}
         <div className="flex items-center gap-4">
           <a 
-            href="https://wa.me/447828714977" 
+            href={whatsappUrl} 
             target="_blank"
+            rel="noopener noreferrer"
             className="hidden sm:flex bg-primary hover:bg-white hover:text-black text-white px-8 py-3 rounded-2xl font-black text-xs items-center gap-2 transition-all shadow-xl shadow-primary/20 transform hover:-translate-y-1"
           >
             <MessageCircle size={18} fill="currentColor" />
@@ -54,7 +58,7 @@ export default function Navbar() {
           <Link href="/pricing" onClick={()=>setIsOpen(false)} className="text-white font-black uppercase text-lg tracking-widest">Pricing</Link>
           <Link href="/blog" onClick={()=>setIsOpen(false)} className="text-white font-black uppercase text-lg tracking-widest">Blog</Link>
           <Link href="/support" onClick={()=>setIsOpen(false)} className="text-white font-black uppercase text-lg tracking-widest">Support</Link>
-          <a href="https://wa.me/447828714977" className="bg-primary text-white py-4 rounded-2xl font-black shadow-lg">WHATSAPP</a>
+          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="bg-primary text-white py-4 rounded-2xl font-black shadow-lg">WHATSAPP</a>
         </div>
       )}
     </header>
