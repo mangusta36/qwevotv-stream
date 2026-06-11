@@ -39,7 +39,7 @@ export default function MoviesCarousel() {
         <div className="grid gap-3 border-t border-white/10 p-5 md:grid-cols-3">
           {[
             { src: "/images/live-sports.webp", alt: "Live sports IPTV viewing on television", label: "Live sports" },
-            { src: "/images/fire-stick.webp", alt: "Generic streaming stick compatible with Fire Stick setup", label: "Fire Stick compatible" },
+            { src: "/images/fire-stick.webp", alt: "Fire TV Stick connected to a television in a dark living room streaming setup", label: "Fire TV setup" },
             { src: "/images/movies-series.webp", alt: "Movies and series streaming screen for home entertainment", label: "Movies and series" },
           ].map((image) => (
             <div key={image.src} className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-white/10 bg-slate-950">
