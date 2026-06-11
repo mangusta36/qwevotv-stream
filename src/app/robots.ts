@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://www.flash4kiptv.vip/sitemap.xml',
+    sitemap: 'https://www.qwevotv.com/sitemap.xml',
   }
 }

@@ -1,87 +1,54 @@
-"use client";
-import { motion } from "framer-motion";
+import { CheckCircle2, Laptop, MonitorPlay, Music2, Play, Radio, Smartphone, Tv2 } from "lucide-react";
+import Image from "next/image";
 
-const movies = [
-  { id: 1, img: "/movie1..webp" }, 
-  { id: 2, img: "/movie2.webp" },
-  { id: 3, img: "/movie3.webp" },
-  { id: 4, img: "/movie4.jpeg" },
-  { id: 5, img: "/movie5.webp" },
-  { id: 6, img: "/movie6.jpeg" }, 
-  { id: 7, img: "/movie7.jpeg" },
-  { id: 8, img: "/movie8.jpeg" },
+const coverageItems = [
+  { label: "Live TV", icon: Tv2 },
+  { label: "Sports", icon: Play },
+  { label: "Movies", icon: MonitorPlay },
+  { label: "Series", icon: Radio },
+  { label: "Mobile", icon: Smartphone },
+  { label: "Desktop", icon: Laptop },
+  { label: "Guidance", icon: CheckCircle2 },
+  { label: "Audio", icon: Music2 },
 ];
-
-const duplicatedMovies = [...movies, ...movies, ...movies];
 
 export default function MoviesCarousel() {
   return (
-    <section className="py-24 bg-black overflow-hidden relative">
-      
-      {/* 1. Background Glow Optimized (Orange) */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-primary/10 blur-[120px] rounded-full -z-0" />
-
-      {/* 2. Header Section */}
-      <div className="max-w-7xl mx-auto px-6 text-center relative z-10 mb-20">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-5xl md:text-8xl font-black text-white mb-6 tracking-tighter uppercase leading-none">
-            ULTIMATE CONTENT, <br />
-            <span className="text-transparent bg-clip-text bg-qwevo-glow italic">SPORTS, AND MORE.</span>
+    <section className="section-shell py-6 md:py-10">
+      <div className="surface-panel overflow-hidden">
+        <div className="border-b border-white/10 px-6 py-5 md:px-8">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">What qwevo tv covers</p>
+          <h2 className="mt-2 text-2xl font-black text-white md:text-3xl">
+            A simple lineup of the content people come for first.
           </h2>
-          <p className="text-text-muted max-w-2xl mx-auto text-lg md:text-xl font-light italic leading-relaxed">
-            Dive into <span className="text-white font-bold">qwevo tv</span> massive library. From 4K blockbusters to worldwide live sports events.
-          </p>
-        </motion.div>
-      </div>
+        </div>
 
-      {/* 3. Infinite Carousel */}
-      <div className="relative flex overflow-hidden py-10">
-        <motion.div
-          className="flex gap-6 md:gap-10 flex-nowrap"
-          initial={{ x: "0%" }} 
-          animate={{ x: "-50%" }}    
-          transition={{
-            duration: 40, 
-            ease: "linear",
-            repeat: Infinity,
-          }}
-        >
-          {duplicatedMovies.map((movie, index) => (
-            <div 
-              key={index} 
-              className="flex-shrink-0 w-[240px] md:w-[320px] aspect-[2/3] rounded-[2.5rem] overflow-hidden border border-white/5 shadow-2xl bg-surface group relative"
-            >
-              <img 
-                src={movie.img} 
-                alt={`qwevo tv movie ${movie.id}`} 
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out grayscale-[30%] group-hover:grayscale-0"
-                loading="lazy"
-              />
-              
-              {/* Premium Overlay on Hover */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
-              
-              {/* Subtle Orange Glow on Card Border */}
-              <div className="absolute inset-0 rounded-[2.5rem] border border-primary/0 group-hover:border-primary/40 transition-all duration-500" />
+        <div className="grid gap-3 p-5 sm:grid-cols-2 lg:grid-cols-4">
+          {coverageItems.map((item) => {
+            const Icon = item.icon;
+
+            return (
+              <div key={item.label} className="rounded-2xl border border-white/10 bg-slate-950 p-4">
+                <Icon className="h-5 w-5 text-primary" />
+                <p className="mt-4 text-sm font-medium text-white">{item.label}</p>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="grid gap-3 border-t border-white/10 p-5 md:grid-cols-3">
+          {[
+            { src: "/images/live-sports.webp", alt: "Live sports IPTV viewing on television", label: "Live sports" },
+            { src: "/images/fire-stick.webp", alt: "Generic streaming stick compatible with Fire Stick setup", label: "Fire Stick compatible" },
+            { src: "/images/movies-series.webp", alt: "Movies and series streaming screen for home entertainment", label: "Movies and series" },
+          ].map((image) => (
+            <div key={image.src} className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-white/10 bg-slate-950">
+              <Image src={image.src} alt={image.alt} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+              <p className="absolute bottom-4 left-4 text-sm font-semibold text-white">{image.label}</p>
             </div>
           ))}
-        </motion.div>
-
-        {/* Faded edges (Soft Gradients) */}
-        <div className="absolute top-0 left-0 w-32 md:w-60 h-full bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-        <div className="absolute top-0 right-0 w-32 md:w-60 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
-      </div>
-
-      {/* CTA Line ta7t l-carousel */}
-      <div className="text-center mt-12 relative z-10">
-         <p className="text-[10px] font-black tracking-[0.4em] uppercase text-white/20">
-           New titles added daily to qwevo tv library
-         </p>
+        </div>
       </div>
     </section>
   );

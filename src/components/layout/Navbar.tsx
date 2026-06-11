@@ -1,66 +1,92 @@
 "use client";
-import { MessageCircle, Zap, Menu, X } from "lucide-react"; 
+
+import { NAV_LINKS, SITE_NAME, WHATSAPP_URL } from "@/constants/content";
+import { cn } from "@/lib/utils";
+import { Menu, MessageCircle, Tv2, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
-  // الرابط الجديد مع الميساج
-  const whatsappUrl = "https://wa.me/447828714977?text=Hello.%20(qwevo%20tv)";
-
   return (
-    <header className="w-full fixed top-0 z-[100] py-4 px-6 md:px-12">
-      <nav className="max-w-7xl mx-auto flex justify-between items-center bg-surface/60 backdrop-blur-2xl border border-white/10 px-8 py-4 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-        
-        {/* Logo qwevo tv */}
-        <Link href="/" className="flex items-center gap-2 group cursor-pointer">
-          <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center group-hover:rotate-12 transition-all duration-500 shadow-lg shadow-primary/30">
-            <Zap size={22} className="text-white fill-white" />
-          </div>
-          <span className="text-2xl font-black tracking-tighter lowercase text-white">
-            qwevo <span className="text-primary italic">tv</span>
+    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6">
+      <nav className="section-shell flex items-center justify-between rounded-3xl border border-white/10 bg-slate-950/75 px-4 py-3 backdrop-blur-xl">
+        <Link href="/" className="flex items-center gap-3">
+          <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary text-slate-950">
+            <Tv2 className="h-5 w-5" />
+          </span>
+          <span className="flex flex-col leading-none">
+            <span className="text-xs uppercase tracking-[0.28em] text-slate-400">Premium IPTV</span>
+            <span className="text-lg font-bold text-white">{SITE_NAME}</span>
           </span>
         </Link>
-        
-        {/* Links dialek kamlin */}
-        <div className="hidden lg:flex gap-8 text-[13px] font-extrabold text-white/80">
-          <Link href="/" className="hover:text-primary transition-colors uppercase tracking-[0.15em]">Home</Link>
-          <Link href="/features" className="hover:text-primary transition-colors uppercase tracking-[0.15em]">Features</Link>
-          <Link href="/pricing" className="hover:text-primary transition-colors uppercase tracking-[0.15em]">Pricing</Link>
-          <Link href="/blog" className="hover:text-primary transition-colors uppercase tracking-[0.15em]">Blog</Link>
-          <Link href="/support" className="hover:text-primary transition-colors uppercase tracking-[0.15em] opacity-60 hover:opacity-100">Support</Link>
+
+        <div className="hidden items-center gap-7 lg:flex">
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-xs font-medium uppercase tracking-[0.2em] text-slate-300 transition-colors hover:text-white"
+            >
+              {link.name}
+            </Link>
+          ))}
         </div>
 
-        {/* WhatsApp Button */}
-        <div className="flex items-center gap-4">
-          <a 
-            href={whatsappUrl} 
+        <div className="flex items-center gap-3">
+          <a
+            href={`${WHATSAPP_URL}?text=${encodeURIComponent(`Hello, I want to know more about ${SITE_NAME}.`)}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden sm:flex bg-primary hover:bg-white hover:text-black text-white px-8 py-3 rounded-2xl font-black text-xs items-center gap-2 transition-all shadow-xl shadow-primary/20 transform hover:-translate-y-1"
+            className="hidden items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-semibold text-white transition-colors hover:border-primary/60 hover:bg-white/[0.08] sm:inline-flex"
           >
-            <MessageCircle size={18} fill="currentColor" />
-            WHATSAPP
+            <MessageCircle className="h-4 w-4 text-primary" />
+            WhatsApp
           </a>
-          
-          <button className="lg:hidden text-white p-2" onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <X size={28} /> : <Menu size={28} />}
+
+          <button
+            type="button"
+            aria-label={isOpen ? "Close navigation" : "Open navigation"}
+            aria-expanded={isOpen}
+            className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-white lg:hidden"
+            onClick={() => setIsOpen((value) => !value)}
+          >
+            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
       </nav>
 
-      {/* Mobile Menu */}
-      {isOpen && (
-        <div className="lg:hidden absolute top-28 left-6 right-6 bg-surface border border-white/10 p-8 rounded-[2rem] flex flex-col gap-6 text-center z-50 shadow-2xl backdrop-blur-3xl">
-          <Link href="/" onClick={()=>setIsOpen(false)} className="text-white font-black uppercase text-lg tracking-widest">Home</Link>
-          <Link href="/features" onClick={()=>setIsOpen(false)} className="text-white font-black uppercase text-lg tracking-widest">Features</Link>
-          <Link href="/pricing" onClick={()=>setIsOpen(false)} className="text-white font-black uppercase text-lg tracking-widest">Pricing</Link>
-          <Link href="/blog" onClick={()=>setIsOpen(false)} className="text-white font-black uppercase text-lg tracking-widest">Blog</Link>
-          <Link href="/support" onClick={()=>setIsOpen(false)} className="text-white font-black uppercase text-lg tracking-widest">Support</Link>
-          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="bg-primary text-white py-4 rounded-2xl font-black shadow-lg">WHATSAPP</a>
+      <div
+        className={cn(
+          "section-shell lg:hidden",
+          isOpen ? "pointer-events-auto mt-3 opacity-100" : "pointer-events-none mt-0 opacity-0",
+        )}
+      >
+        <div className="rounded-3xl border border-white/10 bg-slate-950/95 p-4 shadow-2xl backdrop-blur-xl transition-all">
+          <div className="grid gap-2">
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="rounded-2xl px-4 py-3 text-sm font-medium text-white transition-colors hover:bg-white/[0.05]"
+                onClick={() => setIsOpen(false)}
+              >
+                {link.name}
+              </Link>
+            ))}
+            <a
+              href={`${WHATSAPP_URL}?text=${encodeURIComponent(`Hello, I want to know more about ${SITE_NAME}.`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 inline-flex items-center justify-center gap-2 rounded-2xl bg-primary px-4 py-3 text-sm font-semibold text-slate-950"
+            >
+              <MessageCircle className="h-4 w-4" />
+              WhatsApp
+            </a>
+          </div>
         </div>
-      )}
+      </div>
     </header>
   );
 }

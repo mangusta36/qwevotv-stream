@@ -1,125 +1,106 @@
-"use client";
-import { Check, Star, MessageCircle, Crown, Zap } from "lucide-react";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { motion } from "framer-motion";
+import Navbar from "@/components/layout/Navbar";
+import { PRICING_PLANS, SITE_NAME, WHATSAPP_URL } from "@/constants/content";
+import { ArrowRight, Check, Star } from "lucide-react";
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Pricing - qwevo tv subscription plans",
+  description: "Compare qwevo tv subscription plans with clear pricing, device flexibility, and a simpler support flow.",
+  alternates: {
+    canonical: "/pricing",
+  },
+};
 
 export default function PricingPage() {
-  const plans = [
-    {
-      name: "Qwevo Starter",
-      duration: "3 Months",
-      price: "37",
-      monthly: "12.33",
-      features: ["25,000+ Channels", "4K HDR Content", "Anti-Freeze v2", "All Devices", "Instant Activation"],
-      isPopular: false,
-      isBestValue: false,
-    },
-    {
-      name: "Qwevo Popular",
-      duration: "6 Months",
-      price: "49",
-      monthly: "8.16",
-      features: ["Full Channel List", "Cinema Library", "4K & 8K Support", "Anti-Freeze v2", "Priority Support"],
-      isPopular: true,
-      isBestValue: false,
-    },
-    {
-      name: "Qwevo Ultimate",
-      duration: "12 Months",
-      price: "67",
-      monthly: "5.58",
-      features: ["Lifetime Updates", "All Premium Sports", "8K Ultra HD Content", "Multiple Servers", "Free Setup Help", "VIP Support"],
-      isPopular: false,
-      isBestValue: true,
-    }
-  ];
-
-  const WHATSAPP_NUMBER = "447828714977";
-
   return (
-    <main className="min-h-screen bg-background text-text-main selection:bg-primary/30">
+    <main className="min-h-screen bg-background text-white">
       <Navbar />
-      
-      <div className="max-w-7xl mx-auto pt-48 pb-20 px-6">
-        {/* Glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-primary/10 blur-[150px] -z-10" />
 
-        <div className="text-center mb-24">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <h1 className="text-6xl md:text-8xl font-black tracking-tighter mb-6 uppercase italic leading-none">
-              PREMIUM <span className="text-primary not-italic">PLANS.</span>
+      <section className="section-shell pt-32 md:pt-36">
+        <div className="grid gap-8 lg:grid-cols-[1fr_0.9fr] lg:items-center">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">Pricing</p>
+            <h1 className="mt-4 max-w-3xl text-4xl font-black leading-tight text-white md:text-6xl">
+              qwevo tv pricing that is easier to compare at a glance.
             </h1>
-            <p className="text-text-muted text-lg max-w-2xl mx-auto font-light">
-              Choose your pass to the future of entertainment. No hidden fees, cancel anytime via <span className="text-white font-bold">qwevo tv</span> Support.
+            <p className="mt-5 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
+              The goal is simple: make the plans easy to scan, easy to compare, and easy to hand off to support if you need help later.
             </p>
-          </motion.div>
+          </div>
+          <div className="relative aspect-[16/10] overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950">
+            <Image src="/images/4k-entertainment.webp" alt="4K IPTV entertainment pricing visual" fill priority sizes="(min-width: 1024px) 42vw, 100vw" className="object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent" />
+          </div>
         </div>
+      </section>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {plans.map((plan, index) => (
-            <motion.div 
-              key={index}
-              whileHover={{ y: -10 }}
-              className={`relative flex flex-col rounded-[3rem] p-1 ${
-                plan.isPopular ? 'bg-primary shadow-[0_0_50px_rgba(255,77,0,0.2)]' : 'bg-white/10'
+      <section className="section-shell py-12 md:py-16">
+        <div className="grid gap-4 lg:grid-cols-3">
+          {PRICING_PLANS.map((plan) => (
+            <article
+              key={plan.id}
+              className={`relative flex h-full flex-col rounded-[2rem] border p-6 ${
+                plan.recommended ? "border-primary/60 bg-primary/10" : "border-white/10 bg-white/[0.03]"
               }`}
             >
-              <div className="bg-surface rounded-[2.9rem] p-10 lg:p-12 flex flex-col h-full">
-                
-                {plan.isPopular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-white px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
-                    <Star size={12} fill="white" /> Most Popular
-                  </div>
-                )}
-
-                <h3 className="text-primary font-black tracking-[0.3em] text-[11px] uppercase mb-4">{plan.duration}</h3>
-                <h2 className="text-3xl font-black mb-8 italic uppercase text-white">{plan.name}</h2>
-
-                <div className="mb-10">
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-7xl font-black tracking-tighter text-white">€{plan.price}</span>
-                  </div>
-                  <span className="text-text-muted font-bold text-sm uppercase tracking-widest mt-2 block">
-                    €{plan.monthly} per month
-                  </span>
+              {plan.recommended ? (
+                <div className="absolute -top-3 right-5 inline-flex items-center gap-2 rounded-full bg-primary px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-950">
+                  <Star className="h-3.5 w-3.5" />
+                  Best value
                 </div>
+              ) : null}
 
-                <div className="space-y-4 mb-12 flex-grow">
-                  {plan.features.map((feature, i) => (
-                    <div key={i} className="flex items-center gap-3">
-                      <div className="bg-primary/20 p-1 rounded-lg">
-                        <Check size={14} className="text-primary" strokeWidth={4} />
-                      </div>
-                      <span className="text-sm font-bold text-white/70 italic">{feature}</span>
-                    </div>
-                  ))}
-                </div>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">{plan.duration}</p>
+              <h2 className="mt-2 text-2xl font-semibold text-white">{plan.name}</h2>
+              <p className="mt-6 text-5xl font-black text-white">€{plan.price}</p>
+              <p className="mt-2 text-sm text-slate-400">About €{plan.monthly} per month.</p>
 
-                <a 
-                  href={`https://wa.me/${WHATSAPP_NUMBER}?text=I want to subscribe to ${plan.name} (${plan.duration})`}
-                  target="_blank"
-                  className={`flex items-center justify-center gap-3 w-full py-5 rounded-2xl font-black text-xs tracking-widest transition-all ${
-                    plan.isPopular 
-                    ? 'bg-primary text-white hover:bg-white hover:text-black' 
-                    : 'bg-white/5 border border-white/10 text-white hover:border-primary hover:text-primary'
-                  }`}
-                >
-                  <Zap size={18} fill="currentColor" /> GET ACCESS
-                </a>
-              </div>
-            </motion.div>
+              <ul className="mt-6 space-y-3">
+                {plan.features.map((feature) => (
+                  <li key={feature} className="flex items-start gap-3 text-sm text-slate-300">
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <a
+                href={`${WHATSAPP_URL}?text=${encodeURIComponent(`Hello, I want the ${plan.duration} plan from ${SITE_NAME}.`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`mt-8 inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3 text-sm font-semibold transition-colors ${
+                  plan.recommended ? "bg-primary text-slate-950 hover:bg-primary-light" : "border border-white/10 bg-white/[0.04] text-white hover:border-primary/60 hover:bg-white/[0.08]"
+                }`}
+              >
+                Choose plan
+                <ArrowRight className="h-4 w-4" />
+              </a>
+            </article>
           ))}
         </div>
+      </section>
 
-        <div className="mt-24 text-center opacity-30">
-          <p className="text-[10px] font-black tracking-[0.5em] uppercase flex items-center justify-center gap-4">
-            <span className="w-12 h-px bg-white" />
-            Secure Encrypted Activation
-            <span className="w-12 h-px bg-white" />
+      <section className="section-shell pb-14 md:pb-20">
+        <div className="surface-panel p-6 md:p-8">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">Need help choosing?</p>
+          <h2 className="mt-3 text-2xl font-semibold text-white">Pick the plan, then check support if you want setup guidance.</h2>
+          <p className="mt-4 text-sm leading-relaxed text-slate-300">
+            The pricing page now acts like a proper decision page instead of another full-screen sales block.
           </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link href="/support" className="inline-flex items-center gap-2 rounded-2xl bg-primary px-5 py-3 text-sm font-semibold text-slate-950">
+              Visit support
+            </Link>
+            <Link href="/blog" className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-3 text-sm font-semibold text-white">
+              Read blog guides
+            </Link>
+          </div>
         </div>
-      </div>
+      </section>
+
       <Footer />
     </main>
   );

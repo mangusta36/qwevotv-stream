@@ -1,119 +1,117 @@
-"use client";
-import { MessageCircle, HelpCircle, ExternalLink, ShieldCheck, CheckCircle2 } from "lucide-react";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import Navbar from "@/components/layout/Navbar";
+import { Accordion } from "@/components/ui/Accordion";
+import { FAQ_ITEMS, SUPPORT_ITEMS, WHATSAPP_URL } from "@/constants/content";
+import { ArrowRight, MessageCircle, ShieldCheck, Sparkles } from "lucide-react";
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Support - qwevo tv setup help and troubleshooting",
+  description: "Get qwevo tv support for setup, renewals, troubleshooting, and device guidance through WhatsApp and clear help pages.",
+  alternates: {
+    canonical: "/support",
+  },
+};
 
 export default function SupportPage() {
-  const faqs = [
-    {
-      q: "how long does it take to activate my qwevo tv account?",
-      a: "activation is usually instant. you will receive your credentials via whatsapp within 5 to 15 minutes after payment."
-    },
-    {
-      q: "which devices does qwevo tv support?",
-      a: "we support all 2026 devices: smart tvs, firestick, android boxes, mag, pc, and all smartphones."
-    },
-    {
-      q: "do you offer a refund if the service doesn't work?",
-      a: "yes, qwevo tv offers a 7-day money-back guarantee for any technical issues we cannot solve."
-    },
-    {
-      q: "can i use qwevo tv on multiple devices?",
-      a: "standard plans are for 1 device. contact our whatsapp support for special multi-room discounts."
-    }
-  ];
-
   return (
-    <main className="min-h-screen bg-[#050505] text-white selection:bg-primary/30">
+    <main className="min-h-screen bg-background text-white">
       <Navbar />
-      
-      <div className="max-w-7xl mx-auto pt-48 pb-20 px-6">
-        
-        {/* --- Header --- */}
-        <div className="text-center mb-24 relative">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-primary/20 blur-[130px] -z-10" />
-          
-          <div className="inline-flex items-center gap-2 bg-green-500/10 border border-green-500/20 px-5 py-2 rounded-full mb-10">
-            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-            <span className="text-green-500 text-[10px] font-bold tracking-widest">qwevo tv servers: online</span>
+
+      <section className="section-shell pt-32 md:pt-36">
+        <div className="grid gap-8 lg:grid-cols-[1fr_0.9fr] lg:items-center">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">Support</p>
+            <h1 className="mt-4 max-w-3xl text-4xl font-black leading-tight text-white md:text-6xl">
+              qwevo tv support for setup, renewals, and troubleshooting.
+            </h1>
+            <p className="mt-5 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
+              The support page is now built like a help center: clear starting points, simple follow-up actions, and fewer distractions.
+            </p>
           </div>
-
-          <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-8 leading-none italic">
-            qwevo tv <span className="text-primary not-italic text-6xl md:text-8xl">support</span>.
-          </h1>
-          <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto font-medium italic lowercase">
-            need help with your qwevo tv subscription? our technical team is available 24/7 on whatsapp.
-          </p>
+          <div className="relative aspect-[16/10] overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950">
+            <Image src="/images/android-devices.webp" alt="Android phone and smart TV support visual" fill priority sizes="(min-width: 1024px) 42vw, 100vw" className="object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent" />
+          </div>
         </div>
+      </section>
 
-        {/* --- Contact Cards --- */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-32 max-w-5xl mx-auto">
-          
-          {/* WhatsApp Card */}
-          <a 
-            href="https://wa.me/447828714977" 
+      <section className="section-shell py-12 md:py-16">
+        <div className="grid gap-4 md:grid-cols-3">
+          {SUPPORT_ITEMS.map((item) => (
+            <article key={item.title} className="surface-panel p-6">
+              <Sparkles className="h-6 w-6 text-primary" />
+              <h2 className="mt-5 text-lg font-semibold text-white">{item.title}</h2>
+              <p className="mt-3 text-sm leading-relaxed text-slate-300">{item.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section-shell pb-12 md:pb-16">
+        <div className="grid gap-4 lg:grid-cols-[0.95fr_1.05fr]">
+          <a
+            href={WHATSAPP_URL}
             target="_blank"
-            className="group relative p-12 rounded-[3.5rem] bg-surface border border-white/5 hover:border-[#25D366]/50 transition-all duration-500 cursor-pointer"
+            rel="noopener noreferrer"
+            className="surface-panel p-6 md:p-8 transition-colors hover:border-primary/60"
           >
-             <div className="bg-[#25D366] w-16 h-16 rounded-2xl flex items-center justify-center mb-10 shadow-[0_0_30px_rgba(37,211,102,0.3)]">
-                <MessageCircle size={35} className="text-white" fill="white" />
-             </div>
-             <h3 className="text-3xl font-black mb-4 italic lowercase">live whatsapp</h3>
-             <p className="text-gray-400 text-base mb-10 leading-relaxed font-medium">connect instantly with our technical agents for setup, renewal, or trial requests.</p>
-             <div className="flex items-center gap-3 text-[#25D366] font-bold text-sm tracking-widest uppercase group-hover:gap-6 transition-all">
-               chat on whatsapp <ExternalLink size={16} />
-             </div>
-          </a>
-
-          {/* Setup Guides */}
-          <a 
-            href="/blog"
-            className="group relative p-12 rounded-[3.5rem] bg-surface border border-white/5 hover:border-primary/50 transition-all duration-500 cursor-pointer"
-          >
-             <div className="bg-primary w-16 h-16 rounded-2xl flex items-center justify-center mb-10 shadow-[0_0_30px_rgba(168,85,247,0.3)]">
-                <HelpCircle size={35} className="text-white" />
-             </div>
-             <h3 className="text-3xl font-black mb-4 italic lowercase">setup guides</h3>
-             <p className="text-gray-400 text-base mb-10 leading-relaxed font-medium">step-by-step tutorials for qwevo tv on all devices (smart tv, firestick, etc).</p>
-             <div className="flex items-center gap-3 text-primary font-bold text-sm tracking-widest uppercase group-hover:gap-6 transition-all">
-               view all guides <ExternalLink size={16} />
-             </div>
-          </a>
-        </div>
-
-        {/* --- FAQ Section --- */}
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-black mb-6 italic tracking-tighter">qwevo tv <span className="text-primary italic">faq</span></h2>
-            <div className="w-24 h-1.5 bg-primary mx-auto rounded-full" />
-          </div>
-
-          <div className="space-y-6">
-            {faqs.map((faq, index) => (
-              <div key={index} className="group bg-white/[0.02] border border-white/5 rounded-[2.5rem] p-10 hover:bg-white/[0.04] transition-all duration-300">
-                <div className="flex gap-6">
-                  <div className="mt-1">
-                    <CheckCircle2 size={24} className="text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="text-xl font-black mb-4 group-hover:text-primary transition-colors italic tracking-tight lowercase">{faq.q}</h4>
-                    <p className="text-gray-400 text-base leading-relaxed font-medium">{faq.a}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* --- Security Badge --- */}
-        <div className="mt-32 flex flex-col items-center">
-            <div className="flex items-center gap-4 bg-white/5 px-10 py-5 rounded-full border border-white/10">
-              <ShieldCheck className="text-primary" size={24} />
-              <span className="text-[11px] font-bold tracking-[0.4em] text-gray-400 lowercase">qwevo tv secure support</span>
+            <div className="flex items-center gap-3">
+              <MessageCircle className="h-6 w-6 text-primary" />
+              <h2 className="text-2xl font-semibold text-white">WhatsApp support</h2>
             </div>
-        </div>
+            <p className="mt-4 text-sm leading-relaxed text-slate-300">
+              Use the fastest support path for setup, renewals, and account questions.
+            </p>
+            <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary">
+              Open WhatsApp
+              <ArrowRight className="h-4 w-4" />
+            </div>
+          </a>
 
-      </div>
+          <Link href="/blog" className="surface-panel p-6 md:p-8 transition-colors hover:border-primary/60">
+            <div className="flex items-center gap-3">
+              <ShieldCheck className="h-6 w-6 text-primary" />
+              <h2 className="text-2xl font-semibold text-white">Setup guides</h2>
+            </div>
+            <p className="mt-4 text-sm leading-relaxed text-slate-300">
+              Browse step-by-step articles for Smart TV, Fire Stick, Android TV, and mobile devices.
+            </p>
+            <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary">
+              Read the blog
+              <ArrowRight className="h-4 w-4" />
+            </div>
+          </Link>
+        </div>
+      </section>
+
+      <section className="section-shell pb-14 md:pb-20">
+        <div className="grid gap-6 lg:grid-cols-[1fr_0.9fr]">
+          <div className="surface-panel p-6 md:p-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">FAQ</p>
+            <h2 className="mt-3 text-2xl font-semibold text-white">Frequently asked support questions</h2>
+            <Accordion items={FAQ_ITEMS} className="mt-6" />
+          </div>
+          <div className="surface-panel p-6 md:p-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">Best next move</p>
+            <h2 className="mt-3 text-2xl font-semibold text-white">If you know the device, start with the guide.</h2>
+            <p className="mt-4 text-sm leading-relaxed text-slate-300">
+              The support page now points people to the right help path without making them scroll through a large wall of text.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link href="/pricing" className="inline-flex items-center gap-2 rounded-2xl bg-primary px-5 py-3 text-sm font-semibold text-slate-950">
+                View pricing
+              </Link>
+              <Link href="/features" className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-3 text-sm font-semibold text-white">
+                Explore features
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <Footer />
     </main>
   );

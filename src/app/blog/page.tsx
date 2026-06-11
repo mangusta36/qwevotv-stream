@@ -1,95 +1,164 @@
-"use client";
-import { motion } from "framer-motion";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { Calendar, User, ArrowRight, Search } from "lucide-react";
+import Navbar from "@/components/layout/Navbar";
+import { blogPosts } from "@/lib/posts";
+import { ArrowRight, Calendar, Clock3, User } from "lucide-react";
+import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-// Information remains from your central file
-import { blogPosts } from "@/lib/posts"; 
+
+export const metadata: Metadata = {
+  title: "Blog - IPTV setup guides, troubleshooting, and device advice",
+  description: "Read practical qwevo tv guides for setup, buffering fixes, pricing comparisons, device help, and support tips.",
+  alternates: {
+    canonical: "/blog",
+  },
+};
 
 export default function BlogPage() {
+  const featured = blogPosts[0];
+
   return (
-    <main className="bg-background min-h-screen text-white font-sans selection:bg-primary selection:text-white">
+    <main className="min-h-screen bg-background text-white">
       <Navbar />
 
-      {/* Hero Section - Updated for qwevo tv */}
-      <section className="pt-48 pb-24 px-6 relative overflow-hidden">
-        {/* Glow Orange behind title */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/10 blur-[130px] rounded-full -z-10" />
-        
-        <div className="max-w-7xl mx-auto text-center relative z-10">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <span className="text-primary font-black tracking-[0.3em] text-xs uppercase mb-4 block">Information Hub</span>
-            <h1 className="text-6xl md:text-8xl font-black italic uppercase tracking-tighter mb-8 leading-none">
-              qwevo tv <span className="text-transparent bg-clip-text bg-qwevo-glow not-italic">INSIGHTS</span>
-            </h1>
-            <p className="text-text-muted text-lg md:text-xl max-w-3xl mx-auto leading-relaxed italic text-balance">
-              The world's most comprehensive guides for <span className="text-white font-bold underline decoration-primary underline-offset-4">Ultra-HD Streaming</span> and next-gen IPTV technology.
-            </p>
-          </motion.div>
+      <section className="section-shell pt-32 md:pt-36">
+        <div className="max-w-3xl">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">Blog</p>
+          <h1 className="mt-4 text-4xl font-black leading-tight text-white md:text-6xl">
+            IPTV guides written for setup, support, and search intent.
+          </h1>
+          <p className="mt-5 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
+            The blog focuses on the questions people actually ask: how to set up devices, how to stop buffering, how to compare plans, and how to get support quickly.
+          </p>
+        </div>
 
-          {/* Search Bar - Optimized for New Theme */}
-          <div className="mt-12 max-w-2xl mx-auto relative group">
-            <input 
-              type="text" 
-              placeholder="Search trends, guides, and tutorials..." 
-              className="w-full bg-white/[0.03] border border-white/10 rounded-2xl py-6 px-8 outline-none focus:border-primary/50 transition-all text-white placeholder:text-gray-600 italic backdrop-blur-md"
-            />
-            <Search className="absolute right-6 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-primary transition-colors" />
+        <div className="mt-10 grid gap-4 md:grid-cols-[1.25fr_0.75fr]">
+          <article className="surface-panel overflow-hidden">
+            <div className="relative aspect-[16/8]">
+              <Image
+                src={featured.image}
+                alt={featured.imageAlt}
+                fill
+                loading="lazy"
+                placeholder="blur"
+                blurDataURL={featured.blurDataURL}
+                sizes="(min-width: 768px) 64vw, 100vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-slate-950/50" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/25 to-transparent" />
+            </div>
+            <div className="p-6 md:p-8">
+              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+                <Clock3 className="h-4 w-4" />
+                Featured guide
+              </div>
+              <h2 className="mt-4 text-2xl font-semibold text-white md:text-3xl">{featured.title}</h2>
+              <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-300">{featured.excerpt}</p>
+              <div className="mt-6 flex flex-wrap items-center gap-4 text-xs text-slate-400">
+                <span className="font-semibold uppercase tracking-[0.18em] text-primary">{featured.category}</span>
+                <span className="inline-flex items-center gap-1.5"><User className="h-3.5 w-3.5" /> {featured.author}</span>
+                <span className="inline-flex items-center gap-1.5"><Calendar className="h-3.5 w-3.5" /> {featured.displayDate}</span>
+                <span className="inline-flex items-center gap-1.5"><Clock3 className="h-3.5 w-3.5" /> {featured.readTime}</span>
+              </div>
+              <Link
+                href={`/blog/${featured.id}`}
+                className="mt-8 inline-flex items-center gap-2 rounded-2xl bg-primary px-5 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-primary-light"
+              >
+                Read featured guide
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </article>
+
+          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-1">
+            {[
+              {
+                label: "Pricing",
+                href: "/pricing",
+                copy: "Compare plans and monthly value.",
+                image: "/images/blog/iptv-pricing-guide-640.webp",
+                alt: "Person comparing IPTV subscription pricing on a laptop",
+              },
+              {
+                label: "Support",
+                href: "/support",
+                copy: "Find help for setup and renewals.",
+                image: "/images/blog/iptv-support-and-troubleshooting-640.webp",
+                alt: "Customer support agent with headset for IPTV help",
+              },
+              {
+                label: "Features",
+                href: "/features",
+                copy: "See the main product strengths.",
+                image: "/images/blog/understand-iptv-features-640.webp",
+                alt: "Family using streaming devices and TV features",
+              },
+            ].map((link) => (
+              <Link key={link.href} href={link.href} className="group surface-panel overflow-hidden transition-colors hover:border-primary/60">
+                <div className="relative min-h-[150px] p-5">
+                  <Image
+                    src={link.image}
+                    alt={link.alt}
+                    fill
+                    loading="lazy"
+                    placeholder="blur"
+                    blurDataURL={featured.blurDataURL}
+                    sizes="(min-width: 768px) 28vw, 100vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                  <div className="absolute inset-0 bg-slate-950/55" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/35 to-transparent" />
+                  <div className="relative z-10 flex min-h-[110px] flex-col justify-end">
+                    <p className="text-sm font-semibold text-white">{link.label}</p>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-200">{link.copy}</p>
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Articles Grid */}
-      <section className="pb-32 px-6">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {blogPosts.map((post, index) => (
-            <Link key={post.id} href={`/blog/${post.id}`}>
-              <motion.article
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 }}
-                viewport={{ once: true }}
-                className="bg-surface rounded-[2.5rem] overflow-hidden border border-white/5 hover:border-primary/40 transition-all duration-500 group flex flex-col h-full hover:shadow-[0_20px_50px_rgba(255,77,0,0.1)]"
-              >
-                {/* Image Wrapper */}
-                <div className="aspect-[16/9] relative overflow-hidden">
-                  <img 
-                    src={post.image} 
-                    alt={post.title} 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 grayscale-[20%] group-hover:grayscale-0" 
+      <section className="section-shell py-14 md:py-20">
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {blogPosts.map((post) => {
+            return (
+              <Link key={post.id} href={`/blog/${post.id}`} className="group surface-panel flex h-full flex-col overflow-hidden transition-colors hover:border-primary/60">
+                <div className="relative aspect-[16/10] bg-slate-950">
+                  <Image
+                    src={post.image}
+                    alt={post.imageAlt}
+                    fill
+                    loading="lazy"
+                    placeholder="blur"
+                    blurDataURL={post.blurDataURL}
+                    sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-60" />
-                  <div className="absolute top-6 left-6 bg-primary text-white text-[9px] font-black px-4 py-1.5 rounded-full tracking-widest uppercase shadow-lg shadow-primary/20">
+                  <div className="absolute inset-0 bg-slate-950/50" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/76 via-transparent to-transparent" />
+                  <span className="absolute left-4 top-4 rounded-full border border-white/15 bg-slate-950/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-white backdrop-blur-md">
                     {post.category}
-                  </div>
+                  </span>
                 </div>
-
-                {/* Content */}
-                <div className="p-8 flex flex-col flex-grow">
-                  <div className="flex items-center gap-4 text-[10px] text-gray-500 mb-6 font-bold uppercase tracking-widest">
-                    <span className="flex items-center gap-1.5"><Calendar size={12} className="text-primary" /> {post.date}</span>
-                    <span className="flex items-center gap-1.5"><User size={12} className="text-primary" /> {post.author}</span>
+                <div className="flex flex-1 flex-col p-6">
+                  <div className="flex flex-wrap items-center gap-3 text-xs text-slate-400">
+                    <span className="inline-flex items-center gap-1.5"><User className="h-3.5 w-3.5 text-primary" /> {post.author}</span>
+                    <span className="inline-flex items-center gap-1.5"><Calendar className="h-3.5 w-3.5 text-primary" /> {post.displayDate}</span>
+                    <span className="inline-flex items-center gap-1.5"><Clock3 className="h-3.5 w-3.5 text-primary" /> {post.readTime}</span>
                   </div>
-                  
-                  <h2 className="text-xl font-black mb-4 group-hover:text-primary transition-colors leading-[1.2] italic tracking-tight text-white/90">
+                  <h2 className="mt-5 text-xl font-semibold text-white transition-colors group-hover:text-primary">
                     {post.title}
                   </h2>
-                  
-                  <p className="text-text-muted text-sm mb-6 leading-relaxed line-clamp-3 italic">
-                    {post.excerpt}
-                  </p>
-
-                  <div className="mt-auto flex items-center justify-between pt-6 border-t border-white/5">
-                     <span className="text-[10px] font-black text-white/20 tracking-tighter uppercase">5 min read</span>
-                     <div className="p-3 rounded-full bg-white/5 group-hover:bg-primary text-white transition-all duration-300 group-hover:scale-110">
-                      <ArrowRight size={18} />
-                    </div>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-300">{post.excerpt}</p>
+                  <div className="mt-auto pt-6 text-sm font-semibold text-primary">
+                    Read guide
                   </div>
                 </div>
-              </motion.article>
-            </Link>
-          ))}
+              </Link>
+            );
+          })}
         </div>
       </section>
 

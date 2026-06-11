@@ -9,24 +9,23 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Palette: Vibrant Orange & Pure Black
         primary: {
-          DEFAULT: "#FF4D00", // Orange dyal "Qwevo"
-          light: "#FF7A00",
-          dark: "#CC3D00",
+          DEFAULT: "#38BDF8",
+          light: "#7DD3FC",
+          dark: "#0EA5E9",
         },
         secondary: {
-          DEFAULT: "#FFB800", // Golden yellow bach n-zido l-vibe dyal Premium
+          DEFAULT: "#F8C35B",
         },
-        background: "#000000", // Pure Black
-        surface: "#0A0A0A",    // Card background
+        background: "#05070B",
+        surface: "#0E131B",
         text: {
-          main: "#FFFFFF",
-          muted: "#A1A1AA",
+          main: "#F8FAFC",
+          muted: "#94A3B8",
         }
       },
       backgroundImage: {
-        'qwevo-glow': 'linear-gradient(90deg, #FF4D00, #FFB800)',
+        'qwevo-glow': 'linear-gradient(90deg, #38BDF8, #F8C35B)',
       }
     },
   },

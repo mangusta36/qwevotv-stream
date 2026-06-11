@@ -1,93 +1,289 @@
-"use client";
-import { useParams } from "next/navigation";
-import { blogPosts } from "@/lib/posts"; 
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { Calendar, User, ArrowLeft, Share2 } from "lucide-react";
+import Navbar from "@/components/layout/Navbar";
+import { Accordion } from "@/components/ui/Accordion";
+import { blogPosts } from "@/lib/posts";
+import { ArrowLeft, ArrowRight, Calendar, Clock3, List, User } from "lucide-react";
+import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 
-export default function BlogPostDetail() {
-  const params = useParams();
-  const post = blogPosts.find((p) => p.id === params.id);
+type BlogPostPageProps = {
+  params: Promise<{ id: string }>;
+};
+
+export function generateStaticParams() {
+  return blogPosts.map((post) => ({ id: post.id }));
+}
+
+export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+  const { id } = await params;
+  const post = blogPosts.find((item) => item.id === id);
+
+  if (!post) {
+    return {
+      title: "Article not found",
+      robots: { index: false, follow: false },
+    };
+  }
+
+  return {
+    title: post.title,
+    description: post.excerpt,
+    alternates: {
+      canonical: `/blog/${post.id}`,
+    },
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      type: "article",
+      url: `/blog/${post.id}`,
+      images: [{ url: post.image, alt: post.imageAlt }],
+      publishedTime: post.publishedAt,
+      authors: [post.author],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: [post.image],
+    },
+  };
+}
+
+export default async function BlogPostDetail({ params }: BlogPostPageProps) {
+  const { id } = await params;
+  const post = blogPosts.find((item) => item.id === id);
 
   if (!post) {
     return (
-      <div className="bg-background min-h-screen text-white flex flex-col items-center justify-center">
-        <h1 className="text-2xl font-black italic uppercase tracking-widest mb-6">Article Not Found</h1>
-        <Link href="/blog" className="bg-primary px-8 py-3 rounded-full font-black text-xs uppercase">
-          Back to Hub
-        </Link>
-      </div>
+      <main className="min-h-screen bg-background text-white">
+        <Navbar />
+        <section className="section-shell flex min-h-[60vh] flex-col items-start justify-center pt-28">
+          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-primary">Blog</p>
+          <h1 className="mt-4 text-3xl font-black text-white">Article not found.</h1>
+          <Link href="/blog" className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-primary px-5 py-3 text-sm font-semibold text-slate-950">
+            <ArrowLeft className="h-4 w-4" />
+            Back to blog
+          </Link>
+        </section>
+        <Footer />
+      </main>
     );
   }
 
+  const relatedPosts = blogPosts.filter((item) => item.id !== post.id).slice(0, 3);
+
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: "https://www.qwevotv.com" },
+          { "@type": "ListItem", position: 2, name: "Blog", item: "https://www.qwevotv.com/blog" },
+          { "@type": "ListItem", position: 3, name: post.title, item: `https://www.qwevotv.com/blog/${post.id}` },
+        ],
+      },
+      {
+        "@type": "Article",
+        headline: post.title,
+        description: post.excerpt,
+        image: `https://www.qwevotv.com${post.image}`,
+        datePublished: post.publishedAt,
+        author: { "@type": "Organization", name: post.author },
+        publisher: {
+          "@type": "Organization",
+          name: "qwevo tv",
+          logo: {
+            "@type": "ImageObject",
+            url: "https://www.qwevotv.com/icones.png",
+          },
+        },
+        mainEntityOfPage: `https://www.qwevotv.com/blog/${post.id}`,
+      },
+    ],
+  };
+
   return (
-    <main className="bg-background min-h-screen text-white selection:bg-primary selection:text-white">
+    <main className="min-h-screen bg-background text-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <Navbar />
-      
-      {/* Glow Effect behind Content */}
-      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-primary/5 blur-[150px] -z-0 pointer-events-none" />
 
-      <div className="relative z-10 max-w-4xl mx-auto pt-40 px-6 pb-40">
-        
-        {/* Navigation Back */}
-        <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
-          <Link href="/blog" className="group text-primary flex items-center gap-2 mb-12 font-black text-[10px] uppercase tracking-[0.3em] hover:text-white transition-colors">
-            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Back to qwevo tv blog
-          </Link>
-        </motion.div>
+      <section className="section-shell pt-32 md:pt-36">
+        <Link href="/blog" className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.24em] text-primary transition-colors hover:text-white">
+          <ArrowLeft className="h-4 w-4" />
+          Back to blog
+        </Link>
 
-        {/* Title Section */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
-          <h1 className="text-4xl md:text-7xl font-black italic uppercase leading-[1] tracking-tighter mb-10">
-            {post.title}
-          </h1>
+        <div className="mt-8 grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+          <div className="space-y-5">
+            <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.22em] text-slate-500">
+              <span>{post.category}</span>
+              <span>{post.displayDate}</span>
+              <span>{post.readTime}</span>
+            </div>
 
-          <div className="flex flex-wrap gap-8 text-text-muted text-[10px] font-black mb-12 border-y border-white/5 py-8 uppercase tracking-widest">
-             <span className="flex items-center gap-2 text-white/80"><Calendar size={14} className="text-primary"/> {post.date}</span>
-             <span className="flex items-center gap-2 text-white/80"><User size={14} className="text-primary"/> Author: {post.author}</span>
-             <span className="ml-auto hidden sm:flex items-center gap-2 hover:text-primary cursor-pointer transition-colors">
-               <Share2 size={14} /> Share Article
-             </span>
+            <h1 className="text-4xl font-black leading-tight text-white md:text-6xl">
+              {post.title}
+            </h1>
+            <p className="max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
+              {post.excerpt}
+            </p>
+
+            <div className="flex flex-wrap gap-3 text-xs uppercase tracking-[0.22em] text-slate-500">
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-2 text-slate-300">
+                <Calendar className="h-4 w-4 text-primary" />
+                {post.displayDate}
+              </span>
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-2 text-slate-300">
+                <Clock3 className="h-4 w-4 text-primary" />
+                {post.readTime}
+              </span>
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-2 text-slate-300">
+                <User className="h-4 w-4 text-primary" />
+                {post.author}
+              </span>
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-2 text-slate-300">
+                {post.coverLabel}
+              </span>
+            </div>
           </div>
-        </motion.div>
 
-        {/* Main Image */}
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }} 
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.2 }}
-          className="relative aspect-video mb-16"
-        >
-          <img 
-            src={post.image} 
-            alt={post.title} 
-            className="w-full h-full object-cover rounded-[2.5rem] shadow-[0_30px_60px_rgba(0,0,0,0.5)] border border-white/5" 
-          />
-          <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-t from-black/20 to-transparent" />
-        </motion.div>
-
-        {/* Article Content */}
-        <motion.div 
-          initial={{ opacity: 0 }} 
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="prose prose-invert prose-orange max-w-none text-text-muted italic text-lg md:text-xl leading-relaxed 
-          prose-headings:text-white prose-headings:font-black prose-headings:italic prose-headings:uppercase 
-          prose-strong:text-white prose-a:text-primary hover:prose-a:text-white transition-all"
-          dangerouslySetInnerHTML={{ __html: post.content }} 
-        />
-
-        {/* Bottom CTA */}
-        <div className="mt-24 pt-12 border-t border-white/5 text-center">
-            <p className="text-white/40 text-xs font-black uppercase tracking-[0.4em] mb-8 italic">Ready to join the revolution?</p>
-            <Link href="/#pricing" className="bg-primary text-white px-12 py-5 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-white hover:text-black transition-all shadow-xl shadow-primary/20">
-              Get Started with qwevo tv
-            </Link>
+          <div className="surface-panel overflow-hidden">
+            <div className="relative aspect-[16/10]">
+              <Image
+                src={post.image}
+                alt={post.imageAlt}
+                fill
+                loading="lazy"
+                placeholder="blur"
+                blurDataURL={post.blurDataURL}
+                sizes="(min-width: 1024px) 44vw, 100vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-slate-950/50" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/76 via-transparent to-transparent" />
+              <div className="absolute bottom-5 left-5 right-5">
+                <p className="text-xs uppercase tracking-[0.22em] text-primary">{post.category}</p>
+                <p className="mt-2 text-2xl font-semibold text-white">{post.coverLabel}</p>
+              </div>
+            </div>
+          </div>
         </div>
+      </section>
 
-      </div>
+      <section className="section-shell py-10">
+        <div className="grid gap-6 lg:grid-cols-[280px_minmax(0,1fr)]">
+          <aside className="lg:sticky lg:top-28 lg:self-start">
+            <div className="surface-panel p-5">
+              <div className="flex items-center gap-2 text-sm font-semibold text-white">
+                <List className="h-4 w-4 text-primary" />
+                Table of contents
+              </div>
+              <nav className="mt-4 space-y-2">
+                {post.sections.map((section) => (
+                  <a key={section.id} href={`#${section.id}`} className="block rounded-xl px-3 py-2 text-sm leading-snug text-slate-300 transition-colors hover:bg-white/[0.05] hover:text-white">
+                    {section.heading}
+                  </a>
+                ))}
+              </nav>
+            </div>
+          </aside>
+
+          <article className="space-y-6">
+            {post.sections.map((section) => {
+              const HeadingTag = section.level === 2 ? "h2" : "h3";
+
+              return (
+                <section key={section.heading} id={section.id} className="scroll-mt-28 rounded-[2rem] border border-white/10 bg-white/[0.035] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.22)] md:p-8">
+                  <HeadingTag className={section.level === 2 ? "text-2xl font-black leading-tight text-white md:text-4xl" : "text-xl font-semibold text-white md:text-2xl"}>
+                    {section.heading}
+                  </HeadingTag>
+                  <div className="mt-6 space-y-5 text-base leading-8 text-slate-300 md:text-lg md:leading-9">
+                    {section.paragraphs.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
+                  </div>
+                  {section.bullets ? (
+                    <ul className="mt-6 grid gap-3 md:grid-cols-2">
+                      {section.bullets.map((bullet) => (
+                        <li key={bullet} className="flex gap-3 rounded-2xl border border-white/10 bg-slate-950/60 p-4 text-sm leading-relaxed text-slate-300">
+                          <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
+                  {section.note ? (
+                    <div className="mt-6 rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/15 to-secondary/10 p-5 text-sm leading-relaxed text-slate-100">
+                      {section.note}
+                    </div>
+                  ) : null}
+                </section>
+              );
+            })}
+          </article>
+        </div>
+      </section>
+
+      <section className="section-shell pb-14 md:pb-20">
+        <div className="grid gap-6 lg:grid-cols-[1fr_0.9fr]">
+          <div className="surface-panel p-6 md:p-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">FAQ</p>
+            <h2 className="mt-3 text-2xl font-semibold text-white">Common follow-up questions</h2>
+            <Accordion items={post.faqs} className="mt-6" />
+          </div>
+          <div className="surface-panel p-6 md:p-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">Next step</p>
+            <h2 className="mt-3 text-2xl font-semibold text-white">Use the guide, then compare the plans.</h2>
+            <p className="mt-4 text-sm leading-relaxed text-slate-300">
+              The blog works best when it sends people to the right next page, so the article flow stays useful instead of dropping off at the end.
+            </p>
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              {post.relatedLinks.map((link) => (
+                <Link key={link.href} href={link.href} className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-sm text-white transition-colors hover:border-primary/60">
+                  <div className="flex items-center justify-between gap-3">
+                    <span>{link.label}</span>
+                    <ArrowRight className="h-4 w-4 text-primary" />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-shell pb-14 md:pb-20">
+        <div className="mb-6">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">Related articles</p>
+          <h2 className="mt-3 text-3xl font-black text-white">Keep reading</h2>
+        </div>
+        <div className="grid gap-4 md:grid-cols-3">
+          {relatedPosts.map((item) => (
+            <Link key={item.id} href={`/blog/${item.id}`} className="group surface-panel overflow-hidden transition-colors hover:border-primary/60">
+              <div className="relative aspect-[16/10]">
+                <Image
+                  src={item.image}
+                  alt={item.imageAlt}
+                  fill
+                  loading="lazy"
+                  placeholder="blur"
+                  blurDataURL={item.blurDataURL}
+                  sizes="(min-width: 768px) 33vw, 100vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                />
+                <div className="absolute inset-0 bg-slate-950/50" />
+              </div>
+              <div className="p-5">
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">{item.category}</p>
+                <h3 className="mt-3 text-lg font-semibold text-white">{item.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-300">{item.excerpt}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       <Footer />
     </main>
   );

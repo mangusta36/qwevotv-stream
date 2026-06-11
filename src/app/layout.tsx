@@ -1,75 +1,61 @@
-import type { Metadata, Viewport } from "next"; // Zdna Viewport hna
-import { Inter } from "next/font/google";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
-// 1. Font Optimization: Zdna 'display: swap' bach l-performance dyal ktaba t-ban f-blast-ha
-const inter = Inter({ 
-  subsets: ["latin"],
-  display: 'swap',
-  variable: '--font-inter',
-});
-
-// 2. Viewport & Theme Color: Hada darori bach l-Performance we Best Practices it-l3ou
 export const viewport: Viewport = {
-  themeColor: "#FF4D00", // Lon dyal l-brand dyalk (Orange) f mobile browser
+  themeColor: "#05070B",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 5, // Mzyana l-Accessibility
+  maximumScale: 5,
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.qwevotv.com'), 
-  
+  metadataBase: new URL("https://www.qwevotv.com"),
   title: {
-    default: "qwevo tv | Premium 4K Streaming & Ultimate IPTV Experience",
-    template: "%s | qwevo tv"
+    default: "qwevo tv | Premium IPTV for live TV, sports, and movies",
+    template: "%s | qwevo tv",
   },
-  
   description:
-    "Experience the future of television with qwevo tv. Access 25,000+ global channels, latest movies, and live sports in Ultra HD 4K. Fast, reliable, and 24/7 support.",
+    "qwevo tv is a premium IPTV experience with fast activation, live TV, sports, movies, and device-friendly support.",
 
   alternates: {
-    canonical: 'https://www.qwevotv.com', // Rej3naha absolute bach Google i7sebha s7i7a 100%
+    canonical: "https://www.qwevotv.com",
   },
 
   keywords: [
     "qwevo tv",
-    "Qwevo TV Streaming",
-    "Premium IPTV 2025",
-    "4K Live Sports",
-    "Best IPTV Subscription",
-    "Ultra HD Streaming",
-    "Global TV Channels",
-    "Smart TV IPTV App",
+    "premium IPTV",
+    "live TV streaming",
+    "sports IPTV",
+    "movie IPTV",
+    "Smart TV IPTV",
+    "Fire Stick IPTV",
+    "Android TV IPTV",
   ],
 
-  // OpenGraph (SEO Social Media)
   openGraph: {
-    title: "qwevo tv | Ultimate 4K Streaming Experience",
-    description: "Join qwevo tv and watch 25,000+ live channels and VOD in 4K quality.",
+    title: "qwevo tv | Premium IPTV for live TV, sports, and movies",
+    description: "Discover qwevo tv with clear plans, easier setup, and a lighter premium IPTV interface.",
     url: "https://www.qwevotv.com", 
     siteName: "qwevo tv",
     images: [
       {
-        url: "/og-image.jpg", 
-        width: 1200,
-        height: 630,
-        alt: "qwevo tv - Premium Entertainment",
+        url: "/images/iptv-streaming.webp",
+        width: 1280,
+        height: 860,
+        alt: "qwevo tv premium IPTV",
       },
     ],
     locale: "en_US",
     type: "website",
   },
 
-  // Twitter SEO
   twitter: {
     card: "summary_large_image",
-    title: "qwevo tv | Watch Live TV in 4K",
-    description: "The best streaming platform with instant activation and global coverage.",
-    images: ["/og-image.jpg"],
+    title: "qwevo tv | Premium IPTV",
+    description: "Live TV, sports, movies, and support in a cleaner IPTV experience.",
+    images: ["/images/iptv-streaming.webp"],
   },
 
-  // Robots SEO: Bach Google i-indexi l-site kamel
   robots: {
     index: true,
     follow: true,
@@ -82,14 +68,12 @@ export const metadata: Metadata = {
     },
   },
 
-  // Icons
   icons: {
     icon: [
-      { url: "/favicon.ico" },
-      { url: "/icon.png", type: "image/png" },
+      { url: "/icones.png", type: "image/png" },
     ],
     apple: [
-      { url: "/apple-touch-icon.png" },
+      { url: "/icones.png" },
     ],
   },
 };
@@ -101,7 +85,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.className} antialiased bg-background text-text-main min-h-screen`}>
+      <body className="antialiased bg-background text-text-main min-h-screen">
         {children}
       </body>
     </html>
