@@ -79,16 +79,16 @@ export default async function BlogPostDetail({ params }: BlogPostPageProps) {
       {
         "@type": "BreadcrumbList",
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Home", item: "https://www.qwevotv.com" },
-          { "@type": "ListItem", position: 2, name: "Blog", item: "https://www.qwevotv.com/blog" },
-          { "@type": "ListItem", position: 3, name: post.title, item: `https://www.qwevotv.com/blog/${post.id}` },
+          { "@type": "ListItem", position: 1, name: "Home", item: "https://www.qwevotv.pro" },
+          { "@type": "ListItem", position: 2, name: "Blog", item: "https://www.qwevotv.pro/blog" },
+          { "@type": "ListItem", position: 3, name: post.title, item: `https://www.qwevotv.pro/blog/${post.id}` },
         ],
       },
       {
         "@type": "Article",
         headline: post.title,
         description: post.excerpt,
-        image: `https://www.qwevotv.com${post.image}`,
+        image: `https://www.qwevotv.pro${post.image}`,
         datePublished: post.publishedAt,
         author: { "@type": "Organization", name: post.author },
         publisher: {
@@ -96,10 +96,10 @@ export default async function BlogPostDetail({ params }: BlogPostPageProps) {
           name: "qwevo tv",
           logo: {
             "@type": "ImageObject",
-            url: "https://www.qwevotv.com/icones.png",
+            url: "https://www.qwevotv.pro/icones.png",
           },
         },
-        mainEntityOfPage: `https://www.qwevotv.com/blog/${post.id}`,
+        mainEntityOfPage: `https://www.qwevotv.pro/blog/${post.id}`,
       },
     ],
   };

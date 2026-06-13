@@ -9,7 +9,8 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.qwevotv.com"),
+  // 1. Bedelt l-URL hna
+  metadataBase: new URL("https://www.qwevotv.pro"),
   title: {
     default: "qwevo tv | Premium IPTV for live TV, sports, and movies",
     template: "%s | qwevo tv",
@@ -18,7 +19,8 @@ export const metadata: Metadata = {
     "qwevo tv is a premium IPTV experience with fast activation, live TV, sports, movies, and device-friendly support.",
 
   alternates: {
-    canonical: "https://www.qwevotv.com",
+    // 2. Bedelt Canonical hna
+    canonical: "https://www.qwevotv.pro",
   },
 
   keywords: [
@@ -35,7 +37,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: "qwevo tv | Premium IPTV for live TV, sports, and movies",
     description: "Discover qwevo tv with clear plans, easier setup, and a lighter premium IPTV interface.",
-    url: "https://www.qwevotv.com", 
+    // 3. Bedelt OpenGraph URL hna
+    url: "https://www.qwevotv.pro", 
     siteName: "qwevo tv",
     images: [
       {

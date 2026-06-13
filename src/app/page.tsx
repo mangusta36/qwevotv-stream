@@ -14,10 +14,10 @@ const serviceSchema = {
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://www.qwevotv.com/#organization",
+      "@id": "https://www.qwevotv.pro/#organization",
       name: SITE_NAME,
-      url: "https://www.qwevotv.com",
-      logo: "https://www.qwevotv.com/icones.png",
+      url: "https://www.qwevotv.pro",
+      logo: "https://www.qwevotv.pro/icones.png",
       contactPoint: {
         "@type": "ContactPoint",
         contactType: "customer support",
@@ -27,16 +27,16 @@ const serviceSchema = {
     },
     {
       "@type": "WebSite",
-      "@id": "https://www.qwevotv.com/#website",
+      "@id": "https://www.qwevotv.pro/#website",
       name: SITE_NAME,
-      url: "https://www.qwevotv.com",
-      publisher: { "@id": "https://www.qwevotv.com/#organization" },
+      url: "https://www.qwevotv.pro",
+      publisher: { "@id": "https://www.qwevotv.pro/#organization" },
     },
     {
       "@type": "Service",
-      "@id": "https://www.qwevotv.com/#service",
+      "@id": "https://www.qwevotv.pro/#service",
       name: "qwevo tv premium IPTV service",
-      provider: { "@id": "https://www.qwevotv.com/#organization" },
+      provider: { "@id": "https://www.qwevotv.pro/#organization" },
       serviceType: "IPTV streaming subscription",
       areaServed: "Worldwide",
       description: "Premium IPTV streaming with live TV, sports, movies, and support across major devices.",
@@ -50,7 +50,7 @@ const serviceSchema = {
     },
     {
       "@type": "FAQPage",
-      "@id": "https://www.qwevotv.com/#faq",
+      "@id": "https://www.qwevotv.pro/#faq",
       mainEntity: FAQ_ITEMS.map((item) => ({
         "@type": "Question",
         name: item.question,
@@ -75,6 +75,70 @@ export default function Home() {
 
       <section id="home">
         <Hero />
+      </section>
+
+      {/* --- PRICING SECTION --- */}
+      <section id="pricing" className="section-shell py-12 md:py-20">
+        <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+          <div className="max-w-2xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">Pricing snapshot</p>
+            <h2 className="mt-3 text-3xl font-black leading-tight text-white md:text-5xl">
+              Three plans, written for quick comparison.
+            </h2>
+            <p className="mt-4 text-sm leading-relaxed text-slate-300 md:text-base">
+              The pricing section uses stronger contrast, value cues, and a supporting entertainment image so the plan grid feels deliberate instead of bare.
+            </p>
+          </div>
+          <div className="relative aspect-[16/10] overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950">
+            <Image
+              src="/images/4k-entertainment.webp"
+              alt="4K entertainment streaming interface on television"
+              fill
+              sizes="(min-width: 1024px) 42vw, 100vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-950/25 to-transparent" />
+            <div className="absolute left-5 top-5 rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 backdrop-blur-md">
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-secondary">4K entertainment</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-10 grid gap-4 lg:grid-cols-3">
+          {PRICING_PLANS.map((plan) => (
+            <article key={plan.id} className={`surface-panel flex h-full flex-col p-6 ${plan.recommended ? "border-primary/60 bg-primary/10" : ""}`}>
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">{plan.duration}</p>
+                  <h3 className="mt-2 text-2xl font-semibold text-white">{plan.name}</h3>
+                </div>
+                {plan.recommended ? <span className="rounded-full bg-primary px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-950">Best value</span> : null}
+              </div>
+              <p className="mt-6 text-4xl font-black text-white">€{plan.price}</p>
+              <p className="mt-1 text-sm text-slate-400">About €{plan.monthly} per month.</p>
+              <ul className="mt-6 space-y-3">
+                {/* DEBA HNA GHADI IBANO GA3 L-KHADAMAT HIT HAYYEDNA .slice(0, 4) */}
+                {plan.features.map((feature) => (
+                  <li key={feature} className="flex items-start gap-3 text-sm text-slate-300">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+              <a
+                href={`${WHATSAPP_URL}?text=${encodeURIComponent(`Hello, I want the ${plan.duration} plan from ${SITE_NAME}.`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`mt-8 inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3 text-sm font-semibold transition-colors ${
+                  plan.recommended ? "bg-primary text-slate-950 hover:bg-primary-light" : "border border-white/10 bg-white/[0.04] text-white hover:border-primary/60 hover:bg-white/[0.08]"
+                }`}
+              >
+                Choose plan
+                <ArrowRight className="h-4 w-4" />
+              </a>
+            </article>
+          ))}
+        </div>
       </section>
 
       <MoviesCarousel />
@@ -141,68 +205,6 @@ export default function Home() {
               The redesign uses simpler shapes, smaller visual assets, and a tighter hierarchy so the experience stays usable on a slower development machine.
             </p>
           </div>
-        </div>
-      </section>
-
-      <section id="pricing" className="section-shell py-12 md:py-20">
-        <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-          <div className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">Pricing snapshot</p>
-            <h2 className="mt-3 text-3xl font-black leading-tight text-white md:text-5xl">
-              Three plans, written for quick comparison.
-            </h2>
-            <p className="mt-4 text-sm leading-relaxed text-slate-300 md:text-base">
-              The pricing section uses stronger contrast, value cues, and a supporting entertainment image so the plan grid feels deliberate instead of bare.
-            </p>
-          </div>
-          <div className="relative aspect-[16/10] overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950">
-            <Image
-              src="/images/4k-entertainment.webp"
-              alt="4K entertainment streaming interface on television"
-              fill
-              sizes="(min-width: 1024px) 42vw, 100vw"
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-950/25 to-transparent" />
-            <div className="absolute left-5 top-5 rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 backdrop-blur-md">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-secondary">4K entertainment</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-10 grid gap-4 lg:grid-cols-3">
-          {PRICING_PLANS.map((plan) => (
-            <article key={plan.id} className={`surface-panel flex h-full flex-col p-6 ${plan.recommended ? "border-primary/60 bg-primary/10" : ""}`}>
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">{plan.duration}</p>
-                  <h3 className="mt-2 text-2xl font-semibold text-white">{plan.name}</h3>
-                </div>
-                {plan.recommended ? <span className="rounded-full bg-primary px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-950">Best value</span> : null}
-              </div>
-              <p className="mt-6 text-4xl font-black text-white">€{plan.price}</p>
-              <p className="mt-1 text-sm text-slate-400">About €{plan.monthly} per month.</p>
-              <ul className="mt-6 space-y-3">
-                {plan.features.slice(0, 4).map((feature) => (
-                  <li key={feature} className="flex items-start gap-3 text-sm text-slate-300">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              <a
-                href={`${WHATSAPP_URL}?text=${encodeURIComponent(`Hello, I want the ${plan.duration} plan from ${SITE_NAME}.`)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`mt-8 inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3 text-sm font-semibold transition-colors ${
-                  plan.recommended ? "bg-primary text-slate-950 hover:bg-primary-light" : "border border-white/10 bg-white/[0.04] text-white hover:border-primary/60 hover:bg-white/[0.08]"
-                }`}
-              >
-                Choose plan
-                <ArrowRight className="h-4 w-4" />
-              </a>
-            </article>
-          ))}
         </div>
       </section>
 

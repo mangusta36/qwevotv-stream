@@ -6,6 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://www.qwevotv.com/sitemap.xml',
+    // Bedelna .com b .pro hna
+    sitemap: 'https://www.qwevotv.pro/sitemap.xml',
   }
 }

@@ -2,7 +2,8 @@ import { MetadataRoute } from 'next'
 import { blogPosts } from '@/lib/posts'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://www.qwevotv.com'
+  // Bedelt l-URL hna l-teht
+  const baseUrl = 'https://www.qwevotv.pro' 
   const now = new Date()
 
   const routes: MetadataRoute.Sitemap = [
