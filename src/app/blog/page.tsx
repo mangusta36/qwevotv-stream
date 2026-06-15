@@ -7,10 +7,42 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Blog - IPTV setup guides, troubleshooting, and device advice",
-  description: "Read practical qwevo tv guides for setup, buffering fixes, pricing comparisons, device help, and support tips.",
+  title: "IPTV setup guides, troubleshooting, device help, and buying tips | qwevo tv blog",
+  description: "Practical IPTV guides for Smart TV, Fire Stick, Android TV, iPhone, and iPad setup. Learn how to stop buffering, compare pricing, choose a provider, and get support.",
   alternates: {
-    canonical: "/blog",
+    canonical: "https://www.qwevotv.pro/blog",
+  },
+  openGraph: {
+    title: "IPTV setup guides, troubleshooting, device help, and buying tips | qwevo tv blog",
+    description: "Practical IPTV guides for Smart TV, Fire Stick, Android TV, iPhone, and iPad setup. Learn how to stop buffering, compare pricing, choose a provider, and get support.",
+    url: "https://www.qwevotv.pro/blog",
+    siteName: "qwevo tv",
+    type: "website",
+    images: [
+      {
+        url: "https://www.qwevotv.pro/images/iptv-streaming.webp",
+        width: 1280,
+        height: 860,
+        alt: "qwevo tv blog - IPTV setup guides and device help",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "IPTV setup guides, troubleshooting, device help, and buying tips | qwevo tv blog",
+    description: "Practical IPTV guides for Smart TV, Fire Stick, Android TV, iPhone, and iPad setup.",
+    images: ["https://www.qwevotv.pro/images/iptv-streaming.webp"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 

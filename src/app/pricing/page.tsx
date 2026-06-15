@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: "Pricing - qwevo tv subscription plans",
   description: "Compare qwevo tv subscription plans with clear pricing, device flexibility, and a simpler support flow.",
   alternates: {
-    canonical: "/pricing",
+    canonical: "https://www.qwevotv.pro/pricing",
   },
 };
 

@@ -7,6 +7,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
+const siteUrl = "https://www.qwevotv.pro";
+
 type BlogPostPageProps = {
   params: Promise<{ id: string }>;
 };
@@ -26,28 +28,90 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     };
   }
 
+  const title = `${post.title} | qwevo tv blog`;
+  const description = post.excerpt.length > 155 ? post.excerpt.slice(0, 152) + "..." : post.excerpt;
+
   return {
-    title: post.title,
-    description: post.excerpt,
+    title,
+    description,
     alternates: {
-      canonical: `/blog/${post.id}`,
+      canonical: `${siteUrl}/blog/${post.id}`,
     },
     openGraph: {
-      title: post.title,
-      description: post.excerpt,
+      title,
+      description,
       type: "article",
-      url: `/blog/${post.id}`,
-      images: [{ url: post.image, alt: post.imageAlt }],
+      url: `${siteUrl}/blog/${post.id}`,
+      siteName: "qwevo tv",
+      images: [
+        {
+          url: `${siteUrl}${post.image}`,
+          width: 1280,
+          height: 720,
+          alt: post.imageAlt,
+        },
+      ],
       publishedTime: post.publishedAt,
+      modifiedTime: post.dateModified,
       authors: [post.author],
+      section: post.category,
+      tags: [post.category, "IPTV", "qwevo tv", "streaming"],
     },
     twitter: {
       card: "summary_large_image",
-      title: post.title,
-      description: post.excerpt,
-      images: [post.image],
+      title,
+      description,
+      images: [
+        {
+          url: `${siteUrl}${post.image}`,
+          alt: post.imageAlt,
+        },
+      ],
     },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+    keywords: [
+      post.category.toLowerCase(),
+      "IPTV",
+      "qwevo tv",
+      "streaming",
+      "setup guide",
+    ],
   };
+}
+
+function renderParagraphs(paragraphs: string[], contentLinks?: { paragraphIndex: number; html: string }[]) {
+  if (!contentLinks || contentLinks.length === 0) {
+    return paragraphs.map((paragraph, index) => (
+      <p key={index} dangerouslySetInnerHTML={{ __html: paragraph }} />
+    ));
+  }
+
+  const linkMap = new Map<number, string[]>();
+  for (const link of contentLinks) {
+    const existing = linkMap.get(link.paragraphIndex) || [];
+    existing.push(link.html);
+    linkMap.set(link.paragraphIndex, existing);
+  }
+
+  return paragraphs.map((paragraph, index) => {
+    const extras = linkMap.get(index);
+    if (!extras) {
+      return <p key={index} dangerouslySetInnerHTML={{ __html: paragraph }} />;
+    }
+    return (
+      <p key={index} dangerouslySetInnerHTML={{ __html: paragraph + extras.join(" ") }} />
+    );
+  });
 }
 
 export default async function BlogPostDetail({ params }: BlogPostPageProps) {
@@ -73,7 +137,7 @@ export default async function BlogPostDetail({ params }: BlogPostPageProps) {
 
   const relatedPosts = blogPosts.filter((item) => item.id !== post.id).slice(0, 3);
 
-  const articleSchema = {
+  const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@graph": [
       {
@@ -85,28 +149,57 @@ export default async function BlogPostDetail({ params }: BlogPostPageProps) {
         ],
       },
       {
-        "@type": "Article",
+        "@type": "BlogPosting",
         headline: post.title,
         description: post.excerpt,
-        image: `https://www.qwevotv.pro${post.image}`,
+        image: {
+          "@type": "ImageObject",
+          url: `https://www.qwevotv.pro${post.image}`,
+          width: 1280,
+          height: 720,
+        },
         datePublished: post.publishedAt,
-        author: { "@type": "Organization", name: post.author },
+        dateModified: post.dateModified,
+        wordCount: post.wordCount,
+        timeRequired: `PT${post.readTime.replace(" min", "")}M`,
+        author: {
+          "@type": "Person",
+          name: "qwevo tv editorial team",
+          url: "https://www.qwevotv.pro/blog",
+        },
         publisher: {
           "@type": "Organization",
           name: "qwevo tv",
           logo: {
             "@type": "ImageObject",
             url: "https://www.qwevotv.pro/icones.png",
+            width: 512,
+            height: 512,
           },
         },
-        mainEntityOfPage: `https://www.qwevotv.pro/blog/${post.id}`,
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": `https://www.qwevotv.pro/blog/${post.id}`,
+        },
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `https://www.qwevotv.pro/blog/${post.id}#faq`,
+        mainEntity: post.faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.answer,
+          },
+        })),
       },
     ],
   };
 
   return (
     <main className="min-h-screen bg-background text-white">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <Navbar />
 
       <section className="section-shell pt-32 md:pt-36">
@@ -155,7 +248,7 @@ export default async function BlogPostDetail({ params }: BlogPostPageProps) {
                 src={post.image}
                 alt={post.imageAlt}
                 fill
-                loading="lazy"
+                priority
                 placeholder="blur"
                 blurDataURL={post.blurDataURL}
                 sizes="(min-width: 1024px) 44vw, 100vw"
@@ -200,9 +293,7 @@ export default async function BlogPostDetail({ params }: BlogPostPageProps) {
                     {section.heading}
                   </HeadingTag>
                   <div className="mt-6 space-y-5 text-base leading-8 text-slate-300 md:text-lg md:leading-9">
-                    {section.paragraphs.map((paragraph) => (
-                      <p key={paragraph}>{paragraph}</p>
-                    ))}
+                    {renderParagraphs(section.paragraphs, section.contentLinks)}
                   </div>
                   {section.bullets ? (
                     <ul className="mt-6 grid gap-3 md:grid-cols-2">
@@ -226,18 +317,32 @@ export default async function BlogPostDetail({ params }: BlogPostPageProps) {
         </div>
       </section>
 
-      <section className="section-shell pb-14 md:pb-20">
+      <section id="faq" className="section-shell pb-14 md:pb-20">
         <div className="grid gap-6 lg:grid-cols-[1fr_0.9fr]">
           <div className="surface-panel p-6 md:p-8">
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">FAQ</p>
-            <h2 className="mt-3 text-2xl font-semibold text-white">Common follow-up questions</h2>
+            <h2 className="mt-3 text-2xl font-semibold text-white">Frequently asked questions about {post.category.toLowerCase()}</h2>
             <Accordion items={post.faqs} className="mt-6" />
           </div>
           <div className="surface-panel p-6 md:p-8">
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">Next step</p>
-            <h2 className="mt-3 text-2xl font-semibold text-white">Use the guide, then compare the plans.</h2>
+            <h2 className="mt-3 text-2xl font-semibold text-white">
+              {post.category === "Setup" || post.category === "Devices"
+                ? "Finished the guide? Check plans or get help."
+                : post.category === "Troubleshooting"
+                  ? "Still having issues? Contact support."
+                  : post.category === "Buying guide" || post.category === "Features"
+                    ? "Ready to compare plans and features?"
+                    : "Use the guide, then compare the plans."}
+            </h2>
             <p className="mt-4 text-sm leading-relaxed text-slate-300">
-              The blog works best when it sends people to the right next page, so the article flow stays useful instead of dropping off at the end.
+              {post.category === "Setup" || post.category === "Devices"
+                ? "Once the device setup is complete, compare subscription plans or visit the support page if anything is unclear."
+                : post.category === "Troubleshooting"
+                  ? "If the buffering checklist did not solve the issue, the support team can help with device-specific and account-specific checks."
+                  : post.category === "Buying guide"
+                    ? "Use the pricing page to compare plans by duration, device count, and support level."
+                    : "The blog works best when it sends people to the right next page, so the article flow stays useful instead of dropping off at the end."}
             </p>
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
               {post.relatedLinks.map((link) => (

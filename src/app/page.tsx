@@ -117,7 +117,6 @@ export default function Home() {
               <p className="mt-6 text-4xl font-black text-white">€{plan.price}</p>
               <p className="mt-1 text-sm text-slate-400">About €{plan.monthly} per month.</p>
               <ul className="mt-6 space-y-3">
-                {/* DEBA HNA GHADI IBANO GA3 L-KHADAMAT HIT HAYYEDNA .slice(0, 4) */}
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-3 text-sm text-slate-300">
                     <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
@@ -208,6 +207,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* --- HADA HOWA L-GEZ'E LI BEDDELNA --- */}
       <section className="section-shell py-12 md:py-20">
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div className="max-w-2xl">
@@ -216,15 +216,16 @@ export default function Home() {
               Recent articles with real covers and complete answers.
             </h2>
           </div>
-          <div className="relative aspect-[16/9] overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950">
+          <div className="relative aspect-[16/9] overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950 shadow-2xl">
             <Image
               src="/images/movies-series.webp"
-              alt="Movies and series streaming setup for IPTV entertainment"
+              alt="Professional home cinema setup for premium movie streaming"
               fill
               sizes="(min-width: 1024px) 48vw, 100vw"
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 to-transparent" />
+            {/* Hada howa l-gradient li kaykhalli l-photo tban mkhallta m3a l-background l-khal */}
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent" />
           </div>
         </div>
 

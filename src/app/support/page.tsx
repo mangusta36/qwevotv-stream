@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: "Support - qwevo tv setup help and troubleshooting",
   description: "Get qwevo tv support for setup, renewals, troubleshooting, and device guidance through WhatsApp and clear help pages.",
   alternates: {
-    canonical: "/support",
+    canonical: "https://www.qwevotv.pro/support",
   },
 };
 

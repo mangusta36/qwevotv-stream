@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   description:
     "Explore Qwevo TV premium IPTV features, Smart TV IPTV support, Fire TV IPTV setup, Android TV IPTV compatibility, stable playback, and WhatsApp support.",
   alternates: {
-    canonical: "/features",
+    canonical: "https://www.qwevotv.pro/features",
   },
 };
 
