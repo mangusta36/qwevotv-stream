@@ -17,7 +17,7 @@ const serviceSchema = {
       "@id": "https://www.qwevotv.pro/#organization",
       name: SITE_NAME,
       url: "https://www.qwevotv.pro",
-      logo: "https://www.qwevotv.pro/icones.png",
+      logo: "https://www.qwevotv.pro/icon-512x512.png",
       contactPoint: {
         "@type": "ContactPoint",
         contactType: "customer support",
@@ -66,7 +66,9 @@ const serviceSchema = {
 const sectionIcons = [Tv2, MonitorPlay, ShieldCheck, Sparkles];
 
 export default function Home() {
-  const featuredPosts = blogPosts.slice(0, 3);
+  const featuredPosts = [...blogPosts]
+    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
+    .slice(0, 3);
 
   return (
     <main className="min-h-screen bg-background text-white overflow-x-hidden">

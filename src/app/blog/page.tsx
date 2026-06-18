@@ -5,10 +5,11 @@ import { ArrowRight, Calendar, Clock3, User } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import BlogCard from "./BlogCard";
 
 export const metadata: Metadata = {
   title: "IPTV setup guides, troubleshooting, device help, and buying tips | qwevo tv blog",
-  description: "Practical IPTV guides for Smart TV, Fire Stick, Android TV, iPhone, and iPad setup. Learn how to stop buffering, compare pricing, choose a provider, and get support.",
+  description: "Practical IPTV guides for Smart TV, Fire Stick, Android TV, iPhone, and iPad setup. Learn how to stop buffering, compare pricing, choose a provider, get support, and find the best IPTV apps.",
   alternates: {
     canonical: "https://www.qwevotv.pro/blog",
   },
@@ -46,6 +47,14 @@ export const metadata: Metadata = {
   },
 };
 
+function categorySlug(category: string): string | null {
+  const map: Record<string, string> = {
+    "IPTV Apps": "iptv-apps",
+    "IPTV Technology": "iptv-technology",
+  };
+  return map[category] ?? null;
+}
+
 export default function BlogPage() {
   const featured = blogPosts[0];
 
@@ -60,9 +69,41 @@ export default function BlogPage() {
             IPTV guides written for setup, support, and search intent.
           </h1>
           <p className="mt-5 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-            The blog focuses on the questions people actually ask: how to set up devices, how to stop buffering, how to compare plans, and how to get support quickly.
+            The blog focuses on the questions people actually ask: how to set up devices, how to stop buffering, how to compare plans, how to install IPTV apps, and how to optimize streaming performance.
           </p>
         </div>
+
+        <nav className="mt-10 flex flex-wrap gap-2">
+          <Link
+            href="/blog"
+            className="rounded-full border border-white/15 bg-slate-950/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-white backdrop-blur-md transition-colors hover:border-primary/50 hover:text-primary"
+          >
+            All
+          </Link>
+          {[
+            { label: "Setup", slug: null },
+            { label: "Devices", slug: null },
+            { label: "Troubleshooting", slug: null },
+            { label: "Buying guide", slug: null },
+            { label: "Sports", slug: null },
+            { label: "Mobile", slug: null },
+            { label: "Features", slug: null },
+            { label: "Support", slug: null },
+            { label: "IPTV Apps", slug: "iptv-apps" },
+            { label: "IPTV Technology", slug: "iptv-technology" },
+          ].map((cat) => {
+            const href = cat.slug ? `/blog/${cat.slug}` : "/blog";
+            return (
+              <Link
+                key={cat.label}
+                href={href}
+                className="rounded-full border border-white/15 bg-slate-950/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-white backdrop-blur-md transition-colors hover:border-primary/50 hover:text-primary"
+              >
+                {cat.label}
+              </Link>
+            );
+          })}
+        </nav>
 
         <div className="mt-10 grid gap-4 md:grid-cols-[1.25fr_0.75fr]">
           <article className="surface-panel overflow-hidden">
@@ -88,7 +129,12 @@ export default function BlogPage() {
               <h2 className="mt-4 text-2xl font-semibold text-white md:text-3xl">{featured.title}</h2>
               <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-300">{featured.excerpt}</p>
               <div className="mt-6 flex flex-wrap items-center gap-4 text-xs text-slate-400">
-                <span className="font-semibold uppercase tracking-[0.18em] text-primary">{featured.category}</span>
+                <Link
+                  href={categorySlug(featured.category) ? `/blog/${categorySlug(featured.category)}` : "/blog"}
+                  className="font-semibold uppercase tracking-[0.18em] text-primary transition-colors hover:text-primary-light"
+                >
+                  {featured.category}
+                </Link>
                 <span className="inline-flex items-center gap-1.5"><User className="h-3.5 w-3.5" /> {featured.author}</span>
                 <span className="inline-flex items-center gap-1.5"><Calendar className="h-3.5 w-3.5" /> {featured.displayDate}</span>
                 <span className="inline-flex items-center gap-1.5"><Clock3 className="h-3.5 w-3.5" /> {featured.readTime}</span>
@@ -154,43 +200,9 @@ export default function BlogPage() {
 
       <section className="section-shell py-14 md:py-20">
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {blogPosts.map((post) => {
-            return (
-              <Link key={post.id} href={`/blog/${post.id}`} className="group surface-panel flex h-full flex-col overflow-hidden transition-colors hover:border-primary/60">
-                <div className="relative aspect-[16/10] bg-slate-950">
-                  <Image
-                    src={post.image}
-                    alt={post.imageAlt}
-                    fill
-                    loading="lazy"
-                    placeholder="blur"
-                    blurDataURL={post.blurDataURL}
-                    sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                  />
-                  <div className="absolute inset-0 bg-slate-950/50" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/76 via-transparent to-transparent" />
-                  <span className="absolute left-4 top-4 rounded-full border border-white/15 bg-slate-950/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-white backdrop-blur-md">
-                    {post.category}
-                  </span>
-                </div>
-                <div className="flex flex-1 flex-col p-6">
-                  <div className="flex flex-wrap items-center gap-3 text-xs text-slate-400">
-                    <span className="inline-flex items-center gap-1.5"><User className="h-3.5 w-3.5 text-primary" /> {post.author}</span>
-                    <span className="inline-flex items-center gap-1.5"><Calendar className="h-3.5 w-3.5 text-primary" /> {post.displayDate}</span>
-                    <span className="inline-flex items-center gap-1.5"><Clock3 className="h-3.5 w-3.5 text-primary" /> {post.readTime}</span>
-                  </div>
-                  <h2 className="mt-5 text-xl font-semibold text-white transition-colors group-hover:text-primary">
-                    {post.title}
-                  </h2>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-300">{post.excerpt}</p>
-                  <div className="mt-auto pt-6 text-sm font-semibold text-primary">
-                    Read guide
-                  </div>
-                </div>
-              </Link>
-            );
-          })}
+          {blogPosts.map((post) => (
+            <BlogCard key={post.id} post={post} />
+          ))}
         </div>
       </section>
 

@@ -114,6 +114,14 @@ function renderParagraphs(paragraphs: string[], contentLinks?: { paragraphIndex:
   });
 }
 
+function categorySlug(category: string): string | null {
+  const map: Record<string, string> = {
+    "IPTV Apps": "iptv-apps",
+    "IPTV Technology": "iptv-technology",
+  };
+  return map[category] ?? null;
+}
+
 export default async function BlogPostDetail({ params }: BlogPostPageProps) {
   const { id } = await params;
   const post = blogPosts.find((item) => item.id === id);
@@ -135,7 +143,14 @@ export default async function BlogPostDetail({ params }: BlogPostPageProps) {
     );
   }
 
-  const relatedPosts = blogPosts.filter((item) => item.id !== post.id).slice(0, 3);
+  const relatedPosts = blogPosts
+    .filter((item) => item.id !== post.id)
+    .sort((a, b) => {
+      if (a.category === post.category && b.category !== post.category) return -1;
+      if (a.category !== post.category && b.category === post.category) return 1;
+      return 0;
+    })
+    .slice(0, 3);
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -172,7 +187,7 @@ export default async function BlogPostDetail({ params }: BlogPostPageProps) {
           name: "qwevo tv",
           logo: {
             "@type": "ImageObject",
-            url: "https://www.qwevotv.pro/icones.png",
+            url: "https://www.qwevotv.pro/icon-512x512.png",
             width: 512,
             height: 512,
           },
@@ -211,7 +226,7 @@ export default async function BlogPostDetail({ params }: BlogPostPageProps) {
         <div className="mt-8 grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
           <div className="space-y-5">
             <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.22em] text-slate-500">
-              <span>{post.category}</span>
+              <Link href={categorySlug(post.category) ? `/blog/${categorySlug(post.category)}` : "/blog"} className="transition-colors hover:text-primary">{post.category}</Link>
               <span>{post.displayDate}</span>
               <span>{post.readTime}</span>
             </div>
@@ -257,7 +272,7 @@ export default async function BlogPostDetail({ params }: BlogPostPageProps) {
               <div className="absolute inset-0 bg-slate-950/50" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/76 via-transparent to-transparent" />
               <div className="absolute bottom-5 left-5 right-5">
-                <p className="text-xs uppercase tracking-[0.22em] text-primary">{post.category}</p>
+                <Link href={categorySlug(post.category) ? `/blog/${categorySlug(post.category)}` : "/blog"} className="text-xs uppercase tracking-[0.22em] text-primary transition-colors hover:text-primary-light">{post.category}</Link>
                 <p className="mt-2 text-2xl font-semibold text-white">{post.coverLabel}</p>
               </div>
             </div>
@@ -292,6 +307,20 @@ export default async function BlogPostDetail({ params }: BlogPostPageProps) {
                   <HeadingTag className={section.level === 2 ? "text-2xl font-black leading-tight text-white md:text-4xl" : "text-xl font-semibold text-white md:text-2xl"}>
                     {section.heading}
                   </HeadingTag>
+                  {section.image ? (
+                    <div className="mt-6 overflow-hidden rounded-2xl">
+                      <Image
+                        src={section.image.src}
+                        alt={section.image.alt}
+                        width={section.image.width}
+                        height={section.image.height}
+                        placeholder="blur"
+                        blurDataURL={section.image.blurDataURL}
+                        sizes="(min-width: 1024px) 60vw, 100vw"
+                        className="h-auto w-full object-cover"
+                      />
+                    </div>
+                  ) : null}
                   <div className="mt-6 space-y-5 text-base leading-8 text-slate-300 md:text-lg md:leading-9">
                     {renderParagraphs(section.paragraphs, section.contentLinks)}
                   </div>
@@ -333,7 +362,11 @@ export default async function BlogPostDetail({ params }: BlogPostPageProps) {
                   ? "Still having issues? Contact support."
                   : post.category === "Buying guide" || post.category === "Features"
                     ? "Ready to compare plans and features?"
-                    : "Use the guide, then compare the plans."}
+                    : post.category === "IPTV Apps"
+                      ? "Try the app with a premium IPTV subscription."
+                      : post.category === "IPTV Technology"
+                        ? "Optimize your setup further with more guides."
+                        : "Use the guide, then compare the plans."}
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-slate-300">
               {post.category === "Setup" || post.category === "Devices"
@@ -342,7 +375,11 @@ export default async function BlogPostDetail({ params }: BlogPostPageProps) {
                   ? "If the buffering checklist did not solve the issue, the support team can help with device-specific and account-specific checks."
                   : post.category === "Buying guide"
                     ? "Use the pricing page to compare plans by duration, device count, and support level."
-                    : "The blog works best when it sends people to the right next page, so the article flow stays useful instead of dropping off at the end."}
+                    : post.category === "IPTV Apps"
+                      ? "Now that you have installed IPTV Smarters Pro, pair it with a reliable IPTV service like qwevo tv for the best streaming experience."
+                      : post.category === "IPTV Technology"
+                        ? "Use these optimization techniques to get the best performance from your IPTV setup. Browse more technology guides for advanced tips."
+                        : "The blog works best when it sends people to the right next page, so the article flow stays useful instead of dropping off at the end."}
             </p>
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
               {post.relatedLinks.map((link) => (
