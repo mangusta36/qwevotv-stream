@@ -7,14 +7,16 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "IPTV Technology & Optimization: How IPTV Works and How to Optimize It | qwevo tv",
-  description: "Learn how IPTV actually works — streaming protocols, video codecs, 4K HDR, EPG, anti-freeze technology, and network optimization guides to get the best performance from your IPTV service.",
+  title: "IPTV Technology & Streaming Optimization Guide",
+  description:
+    "Learn how IPTV streaming works — protocols, codecs, 4K HDR, and EPG. Get network optimization tips for peak performance from your IPTV subscription in 2026.",
   alternates: {
     canonical: "https://www.qwevotv.pro/blog/iptv-technology",
   },
   openGraph: {
-    title: "IPTV Technology & Optimization: How IPTV Works and How to Optimize It | qwevo tv",
-    description: "Learn how IPTV works — streaming protocols, video codecs, 4K, and network optimization guides.",
+    title: "IPTV Technology & Streaming Optimization Guide",
+    description:
+      "Learn how IPTV streaming works — protocols, codecs, 4K HDR, and EPG. Get network optimization tips for peak performance from your IPTV subscription.",
     url: "https://www.qwevotv.pro/blog/iptv-technology",
     siteName: "qwevo tv",
     type: "website",
@@ -23,14 +25,15 @@ export const metadata: Metadata = {
         url: "https://www.qwevotv.pro/images/iptv-streaming.webp",
         width: 1280,
         height: 860,
-        alt: "IPTV technology and optimization guide",
+        alt: "IPTV technology and streaming optimization guide",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "IPTV Technology & Optimization: How IPTV Works and How to Optimize It | qwevo tv",
-    description: "Learn how IPTV works — streaming protocols, video codecs, and network optimization.",
+    title: "IPTV Technology & Streaming Optimization Guide",
+    description:
+      "Learn how IPTV streaming works — protocols, codecs, 4K HDR, and EPG. Get network optimization tips for peak performance.",
     images: ["https://www.qwevotv.pro/images/iptv-streaming.webp"],
   },
   robots: {
@@ -46,11 +49,32 @@ export const metadata: Metadata = {
   },
 };
 
+const iptvTechSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.qwevotv.pro" },
+        { "@type": "ListItem", position: 2, name: "Blog", item: "https://www.qwevotv.pro/blog" },
+        { "@type": "ListItem", position: 3, name: "IPTV Technology", item: "https://www.qwevotv.pro/blog/iptv-technology" },
+      ],
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": "https://www.qwevotv.pro/blog/iptv-technology#collectionpage",
+      name: "IPTV Technology & Streaming Optimization Guide",
+      description: "Learn how IPTV works including streaming protocols, video codecs, and network optimization.",
+    },
+  ],
+};
+
 export default function IptvTechnologyPage() {
   const categoryPosts = blogPosts.filter((p) => p.category === "IPTV Technology");
 
   return (
     <main className="min-h-screen bg-background text-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(iptvTechSchema) }} />
       <Navbar />
 
       <section className="section-shell pt-32 md:pt-36">

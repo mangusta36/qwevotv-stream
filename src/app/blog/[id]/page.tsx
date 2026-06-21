@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     };
   }
 
-  const title = `${post.title} | qwevo tv blog`;
+  const title = `${post.title}`;
   const description = post.excerpt.length > 155 ? post.excerpt.slice(0, 152) + "..." : post.excerpt;
 
   return {

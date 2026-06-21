@@ -7,16 +7,46 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Pricing - qwevo tv subscription plans",
-  description: "Compare qwevo tv subscription plans with clear pricing, device flexibility, and a simpler support flow.",
+  title: "qwevo tv IPTV Pricing – Compare Subscription Plans",
+  description:
+    "Compare qwevo tv subscription plans with transparent pricing and flexible device support. Choose from 3, 6, or 12-month IPTV plans starting at just €37.",
   alternates: {
     canonical: "https://www.qwevotv.pro/pricing",
   },
 };
 
+const pricingSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.qwevotv.pro" },
+        { "@type": "ListItem", position: 2, name: "Pricing", item: "https://www.qwevotv.pro/pricing" },
+      ],
+    },
+    {
+      "@type": "Product",
+      "@id": "https://www.qwevotv.pro/pricing#product",
+      name: "qwevo tv Premium IPTV Subscription",
+      description: "Premium IPTV subscription with live TV, sports, movies, and 24/7 support across major devices.",
+      offers: PRICING_PLANS.map((plan, i) => ({
+        "@type": "Offer",
+        name: `${plan.duration} ${plan.name}`,
+        price: plan.price,
+        priceCurrency: "EUR",
+        priceValidUntil: "2027-12-31",
+        availability: "https://schema.org/InStock",
+        url: `https://www.qwevotv.pro/pricing#${plan.id}`,
+      })),
+    },
+  ],
+};
+
 export default function PricingPage() {
   return (
     <main className="min-h-screen bg-background text-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(pricingSchema) }} />
       <Navbar />
 
       <section className="section-shell pt-32 md:pt-36">

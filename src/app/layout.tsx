@@ -9,17 +9,15 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  // 1. Bedelt l-URL hna
   metadataBase: new URL("https://www.qwevotv.pro"),
   title: {
-    default: "qwevo tv | Premium IPTV for live TV, sports, and movies",
+    default: "qwevo tv | Premium IPTV Streaming Service",
     template: "%s | qwevo tv",
   },
   description:
-    "qwevo tv is a premium IPTV experience with fast activation, live TV, sports, movies, and device-friendly support.",
+    "Discover qwevo tv – a premium IPTV service with fast activation, 26,000+ live channels, 4K sports & movie streaming, and 24/7 WhatsApp support for all your devices.",
 
   alternates: {
-    // 2. Bedelt Canonical hna
     canonical: "https://www.qwevotv.pro",
   },
 
@@ -35,9 +33,8 @@ export const metadata: Metadata = {
   ],
 
   openGraph: {
-    title: "qwevo tv | Premium IPTV for live TV, sports, and movies",
-    description: "Discover qwevo tv with clear plans, easier setup, and a lighter premium IPTV interface.",
-    // 3. Bedelt OpenGraph URL hna
+    title: "qwevo tv | Premium IPTV Streaming Service",
+    description: "Discover qwevo tv – a premium IPTV service with fast activation, 26,000+ live channels, 4K sports & movie streaming, and 24/7 WhatsApp support.",
     url: "https://www.qwevotv.pro", 
     siteName: "qwevo tv",
     images: [
@@ -45,7 +42,7 @@ export const metadata: Metadata = {
         url: "/images/iptv-streaming.webp",
         width: 1280,
         height: 860,
-        alt: "qwevo tv premium IPTV",
+        alt: "qwevo tv premium IPTV streaming service interface",
       },
     ],
     locale: "en_US",
@@ -54,8 +51,8 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "qwevo tv | Premium IPTV",
-    description: "Live TV, sports, movies, and support in a cleaner IPTV experience.",
+    title: "qwevo tv | Premium IPTV Streaming Service",
+    description: "Premium IPTV with 26,000+ live channels, 4K sports & movies, and 24/7 WhatsApp support. Fast activation on all devices.",
     images: ["/images/iptv-streaming.webp"],
   },
 

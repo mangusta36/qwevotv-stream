@@ -7,14 +7,16 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "IPTV Apps & Players: Reviews, Setup Guides, and Comparisons | qwevo tv",
-  description: "Find the best IPTV player for every device — Firestick, Android TV, Smart TV, iPhone, and PC. Honest reviews of TiviMate, IPTV Smarters, OTT Navigator, and more.",
+  title: "Best IPTV Apps & Players Guide",
+  description:
+    "Find the best IPTV player for Firestick, Android TV, Smart TV, and iPhone. Honest reviews of TiviMate, IPTV Smarters Pro, and OTT Navigator for optimal streaming.",
   alternates: {
     canonical: "https://www.qwevotv.pro/blog/iptv-apps",
   },
   openGraph: {
-    title: "IPTV Apps & Players: Reviews, Setup Guides, and Comparisons | qwevo tv",
-    description: "Find the best IPTV player for every device. Honest reviews of TiviMate, IPTV Smarters, OTT Navigator, and more.",
+    title: "Best IPTV Apps & Players Guide",
+    description:
+      "Find the best IPTV player for Firestick, Android TV, Smart TV, and iPhone. Honest reviews of TiviMate, IPTV Smarters Pro, and OTT Navigator.",
     url: "https://www.qwevotv.pro/blog/iptv-apps",
     siteName: "qwevo tv",
     type: "website",
@@ -23,14 +25,15 @@ export const metadata: Metadata = {
         url: "https://www.qwevotv.pro/images/iptv-streaming.webp",
         width: 1280,
         height: 860,
-        alt: "IPTV apps and players guide",
+        alt: "Best IPTV apps and players comparison guide",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "IPTV Apps & Players: Reviews, Setup Guides, and Comparisons | qwevo tv",
-    description: "Find the best IPTV player for every device. Honest reviews of TiviMate, IPTV Smarters, and more.",
+    title: "Best IPTV Apps & Players Guide",
+    description:
+      "Find the best IPTV player for Firestick, Android TV, Smart TV, and iPhone. Honest reviews of TiviMate, IPTV Smarters Pro, and OTT Navigator.",
     images: ["https://www.qwevotv.pro/images/iptv-streaming.webp"],
   },
   robots: {
@@ -46,11 +49,32 @@ export const metadata: Metadata = {
   },
 };
 
+const iptvAppsSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.qwevotv.pro" },
+        { "@type": "ListItem", position: 2, name: "Blog", item: "https://www.qwevotv.pro/blog" },
+        { "@type": "ListItem", position: 3, name: "IPTV Apps", item: "https://www.qwevotv.pro/blog/iptv-apps" },
+      ],
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": "https://www.qwevotv.pro/blog/iptv-apps#collectionpage",
+      name: "Best IPTV Apps & Players Guide",
+      description: "Reviews, comparisons, and setup guides for every major IPTV player.",
+    },
+  ],
+};
+
 export default function IptvAppsPage() {
   const categoryPosts = blogPosts.filter((p) => p.category === "IPTV Apps");
 
   return (
     <main className="min-h-screen bg-background text-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(iptvAppsSchema) }} />
       <Navbar />
 
       <section className="section-shell pt-32 md:pt-36">

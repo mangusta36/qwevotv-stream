@@ -8,16 +8,37 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Support - qwevo tv setup help and troubleshooting",
-  description: "Get qwevo tv support for setup, renewals, troubleshooting, and device guidance through WhatsApp and clear help pages.",
+  title: "qwevo tv IPTV Support – Setup Help & Troubleshooting",
+  description:
+    "Get qwevo tv support for quick IPTV setup, renewals, device guidance, and troubleshooting. Contact us via WhatsApp for fast, friendly help with any issue.",
   alternates: {
     canonical: "https://www.qwevotv.pro/support",
   },
 };
 
+const supportSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.qwevotv.pro" },
+        { "@type": "ListItem", position: 2, name: "Support", item: "https://www.qwevotv.pro/support" },
+      ],
+    },
+    {
+      "@type": "ContactPoint",
+      contactType: "customer support",
+      availableLanguage: ["English"],
+      url: WHATSAPP_URL,
+    },
+  ],
+};
+
 export default function SupportPage() {
   return (
     <main className="min-h-screen bg-background text-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(supportSchema) }} />
       <Navbar />
 
       <section className="section-shell pt-32 md:pt-36">

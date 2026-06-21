@@ -18,9 +18,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Qwevo TV Premium IPTV Features and Device Support",
+  title: "Qwevo TV IPTV Features & Device Support Guide",
   description:
-    "Explore Qwevo TV premium IPTV features, Smart TV IPTV support, Fire TV IPTV setup, Android TV IPTV compatibility, stable playback, and WhatsApp support.",
+    "Explore Qwevo TV premium IPTV features for Smart TV, Fire Stick, and Android TV. Learn about stable 4K playback, device compatibility, and responsive WhatsApp support.",
   alternates: {
     canonical: "https://www.qwevotv.pro/features",
   },
@@ -131,9 +131,29 @@ const faqs = [
   },
 ];
 
+const featuresSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.qwevotv.pro" },
+        { "@type": "ListItem", position: 2, name: "Features", item: "https://www.qwevotv.pro/features" },
+      ],
+    },
+    {
+      "@type": "AboutPage",
+      "@id": "https://www.qwevotv.pro/features#aboutpage",
+      name: "Qwevo TV Premium IPTV Features and Device Support",
+      description: "Premium IPTV features including fast setup, stable playback, device compatibility, and 24/7 support.",
+    },
+  ],
+};
+
 export default function FeaturesPage() {
   return (
     <main className="min-h-screen bg-background text-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(featuresSchema) }} />
       <Navbar />
 
       <section className="section-shell pt-32 md:pt-36">
