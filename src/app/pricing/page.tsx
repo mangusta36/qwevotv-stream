@@ -26,18 +26,31 @@ const pricingSchema = {
       ],
     },
     {
+      "@type": "Organization",
+      "@id": "https://www.qwevotv.pro/#organization",
+      name: SITE_NAME,
+      url: "https://www.qwevotv.pro",
+    },
+    {
       "@type": "Product",
       "@id": "https://www.qwevotv.pro/pricing#product",
       name: "qwevo tv Premium IPTV Subscription",
       description: "Premium IPTV subscription with live TV, sports, movies, and 24/7 support across major devices.",
-      offers: PRICING_PLANS.map((plan, i) => ({
+      image: "https://www.qwevotv.pro/images/4k-entertainment.webp",
+      brand: {
+        "@type": "Brand",
+        name: SITE_NAME,
+      },
+      offers: PRICING_PLANS.map((plan) => ({
         "@type": "Offer",
         name: `${plan.duration} ${plan.name}`,
         price: plan.price,
         priceCurrency: "EUR",
         priceValidUntil: "2027-12-31",
         availability: "https://schema.org/InStock",
-        url: `https://www.qwevotv.pro/pricing#${plan.id}`,
+        url: "https://www.qwevotv.pro/pricing",
+        itemCondition: "https://schema.org/NewCondition",
+        seller: { "@id": "https://www.qwevotv.pro/#organization" },
       })),
     },
   ],
