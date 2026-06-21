@@ -10,14 +10,14 @@ import BlogCard from "./BlogCard";
 export const metadata: Metadata = {
   title: "IPTV Setup Guides & Device Help",
   description:
-    "Complete IPTV guides for Smart TV, Fire Stick, Android TV, and mobile. Fix buffering, compare plans, and find the best apps for smooth streaming on any device in 2026.",
+    "Complete IPTV guides for Smart TV, Fire Stick, Android TV, and mobile from qwevo tv. Fix buffering, compare plans, and find top apps for smooth streaming on any device.",
   alternates: {
     canonical: "https://www.qwevotv.pro/blog",
   },
   openGraph: {
     title: "IPTV Setup Guides & Device Help",
     description:
-      "Complete IPTV guides for Smart TV, Fire Stick, Android TV, and mobile. Fix buffering, compare plans, and find the best apps for smooth streaming on any device.",
+      "Complete IPTV guides for Smart TV, Fire Stick, Android TV, and mobile from qwevo tv. Fix buffering, compare plans, and find top apps for smooth streaming on any device.",
     url: "https://www.qwevotv.pro/blog",
     siteName: "qwevo tv",
     type: "website",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "IPTV Setup Guides & Device Help",
     description:
-      "Complete IPTV guides for Smart TV, Fire Stick, Android TV, and mobile. Fix buffering, compare plans, and find the best apps for smooth streaming.",
+      "Complete IPTV guides for Smart TV, Fire Stick, Android TV, and mobile from qwevo tv. Fix buffering, compare plans, and find top apps for smooth streaming on any device.",
     images: ["https://www.qwevotv.pro/images/iptv-streaming.webp"],
   },
   robots: {

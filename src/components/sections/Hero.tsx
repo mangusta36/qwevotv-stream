@@ -35,7 +35,7 @@ export default function Hero() {
               className="inline-flex items-center justify-center gap-2 rounded-2xl bg-primary px-6 py-4 text-sm font-semibold text-slate-950 transition-colors hover:bg-primary-light"
             >
               <Play className="h-4 w-4 fill-current" />
-              Get started
+              Get Trial
             </a>
             <Link
               href="/pricing"
