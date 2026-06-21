@@ -107,6 +107,22 @@ export const FAQ_ITEMS = [
     question: "Do you help with setup?",
     answer: "Yes. Setup guidance and troubleshooting are part of the support experience.",
   },
+  {
+    question: "Can I watch on multiple devices at the same time?",
+    answer: "Yes. Your subscription works across all your devices. Stream on your Smart TV in the living room while someone else watches on a Fire Stick or mobile device in another room.",
+  },
+  {
+    question: "What internet speed do I need for IPTV streaming?",
+    answer: "For standard quality streaming, a 10 Mbps connection is sufficient. For 4K and FHD channels, we recommend at least 25 Mbps for smooth, buffer-free playback.",
+  },
+  {
+    question: "What channels and content are included?",
+    answer: "The service includes 26,000+ live channels covering sports, news, entertainment, and international programming, plus 100,000+ VOD titles with movies and TV series.",
+  },
+  {
+    question: "How does payment work and what methods do you accept?",
+    answer: "Payment is handled through WhatsApp. Our team confirms your plan, processes the payment, and activates your subscription within minutes.",
+  },
 ];
 
 export const SUPPORT_ITEMS = [

@@ -5,7 +5,7 @@ import MoviesCarousel from "@/components/sections/MoviesCarousel";
 import { Accordion } from "@/components/ui/Accordion";
 import { FEATURE_CARDS, FAQ_ITEMS, PRICING_PLANS, SITE_NAME, WHATSAPP_URL } from "@/constants/content";
 import { blogPosts } from "@/lib/posts";
-import { ArrowRight, CheckCircle2, MonitorPlay, ShieldCheck, Sparkles, Tv2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, MonitorPlay, ShieldCheck, Smartphone, Sparkles, Tv2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -209,7 +209,61 @@ export default function Home() {
         </div>
       </section>
 
-      {/* --- HADA HOWA L-GEZ'E LI BEDDELNA --- */}
+      {/* --- DEVICE COMPATIBILITY --- */}
+      <section className="section-shell py-12 md:py-20">
+        <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">Device support</p>
+        <h2 className="mt-3 max-w-3xl text-3xl font-black leading-tight text-white md:text-5xl">
+          Works across all major streaming devices
+        </h2>
+        <p className="mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
+          qwevo tv works with the most popular IPTV devices on the market. Whether you use a Smart TV, Fire Stick, Android TV box, or mobile device, the setup process is quick and the streaming quality stays consistent across every screen.
+        </p>
+
+        <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <article className="surface-panel p-6">
+            <Tv2 className="h-6 w-6 text-primary" />
+            <h3 className="mt-5 text-lg font-semibold text-white">Smart TV</h3>
+            <p className="mt-3 text-sm leading-relaxed text-slate-300">
+              Install the IPTV app directly on Samsung, LG, or Sony Smart TVs. No extra hardware needed — just connect to Wi-Fi and follow the setup steps to start watching live channels and on-demand content.
+            </p>
+            <Link href="/blog/smart-tv-iptv-setup-guide" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary transition-colors hover:text-white">
+              Smart TV guide <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </article>
+          <article className="surface-panel p-6">
+            <MonitorPlay className="h-6 w-6 text-primary" />
+            <h3 className="mt-5 text-lg font-semibold text-white">Fire Stick</h3>
+            <p className="mt-3 text-sm leading-relaxed text-slate-300">
+              Amazon Fire TV Stick is one of the most common devices for IPTV streaming. Install a compatible app from the Amazon store, enter your qwevo tv login details, and start watching in minutes.
+            </p>
+            <Link href="/blog/fire-stick-iptv-setup-guide" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary transition-colors hover:text-white">
+              Fire Stick guide <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </article>
+          <article className="surface-panel p-6">
+            <Tv2 className="h-6 w-6 text-primary" />
+            <h3 className="mt-5 text-lg font-semibold text-white">Android TV & Google TV</h3>
+            <p className="mt-3 text-sm leading-relaxed text-slate-300">
+              Android TV boxes and Google TV devices support IPTV natively through the Play Store. The interface is familiar and finding channels works like a standard electronic program guide.
+            </p>
+            <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-slate-400">
+              Android TV guide — coming soon
+            </span>
+          </article>
+          <article className="surface-panel p-6">
+            <Smartphone className="h-6 w-6 text-primary" />
+            <h3 className="mt-5 text-lg font-semibold text-white">Mobile & Tablet</h3>
+            <p className="mt-3 text-sm leading-relaxed text-slate-300">
+              Watch on your phone or tablet anywhere with an internet connection. qwevo tv stream on both iOS and Android using popular IPTV player apps available in each app store.
+            </p>
+            <Link href="/blog/iptv-apps" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary transition-colors hover:text-white">
+              Best IPTV apps <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </article>
+        </div>
+      </section>
+
+      {/* --- BLOG SECTION --- */}
       <section className="section-shell py-12 md:py-20">
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div className="max-w-2xl">
@@ -226,7 +280,6 @@ export default function Home() {
               sizes="(min-width: 1024px) 48vw, 100vw"
               className="object-cover"
             />
-            {/* Hada howa l-gradient li kaykhalli l-photo tban mkhallta m3a l-background l-khal */}
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent" />
           </div>
         </div>
@@ -248,6 +301,38 @@ export default function Home() {
               </div>
             </article>
           ))}
+        </div>
+      </section>
+
+      {/* --- STREAMING QUALITY & IPTV BENEFITS --- */}
+      <section className="section-shell py-12 md:py-20">
+        <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">Streaming quality</p>
+        <h2 className="mt-3 max-w-3xl text-3xl font-black leading-tight text-white md:text-5xl">
+          Premium IPTV streaming with reliable quality
+        </h2>
+        <p className="mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
+          qwevo tv delivers a consistent IPTV experience with anti-freeze technology, high-resolution channels, and a content library built for live sports, news, and on-demand entertainment.
+        </p>
+
+        <div className="mt-10 grid gap-4 lg:grid-cols-2">
+          <div className="surface-panel p-6 md:p-8">
+            <h3 className="text-lg font-semibold text-white">Anti-freeze servers for buffer-free playback</h3>
+            <p className="mt-3 text-sm leading-relaxed text-slate-300">
+              Buffering is one of the most common frustrations with IPTV streaming. qwevo tv uses anti-freeze server technology to reduce interruptions during live sports events, peak evening hours, and long movie sessions. The infrastructure is built to maintain stable playback even when multiple streams are active at the same time.
+            </p>
+            <Link href="/blog/stop-iptv-buffering" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary transition-colors hover:text-white">
+              How to fix buffering <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
+          <div className="surface-panel p-6 md:p-8">
+            <h3 className="text-lg font-semibold text-white">4K, FHD, and HD channel selection</h3>
+            <p className="mt-3 text-sm leading-relaxed text-slate-300">
+              The service includes channels and VOD content in 4K, Full HD, and standard HD. Live sports and the latest movies stream in the highest resolution your internet connection can support, giving you a viewing experience comparable to traditional cable or satellite TV.
+            </p>
+            <Link href="/pricing" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary transition-colors hover:text-white">
+              Compare plans and pricing <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
         </div>
       </section>
 
