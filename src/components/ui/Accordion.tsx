@@ -30,7 +30,7 @@ export function Accordion({ items, className }: AccordionProps) {
               aria-expanded={open}
               onClick={() => setOpenIndex(open ? null : index)}
             >
-              <span className="text-sm font-semibold text-white md:text-base">{item.question}</span>
+              <h3 className="text-sm font-semibold text-white md:text-base">{item.question}</h3>
               <ChevronDown className={cn("h-4 w-4 shrink-0 text-primary transition-transform", open && "rotate-180")} />
             </button>
             <div className={cn("grid transition-all duration-300", open ? "grid-rows-[1fr]" : "grid-rows-[0fr]")}>

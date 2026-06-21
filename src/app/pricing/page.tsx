@@ -88,6 +88,7 @@ export default function PricingPage() {
               <p className="mt-6 text-5xl font-black text-white">€{plan.price}</p>
               <p className="mt-2 text-sm text-slate-400">About €{plan.monthly} per month.</p>
 
+              <h3 className="sr-only">Plan features</h3>
               <ul className="mt-6 space-y-3">
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-3 text-sm text-slate-300">

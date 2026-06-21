@@ -211,7 +211,7 @@ export default function BlogPage() {
                   <div className="absolute inset-0 bg-slate-950/55" />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/35 to-transparent" />
                   <div className="relative z-10 flex min-h-[110px] flex-col justify-end">
-                    <p className="text-sm font-semibold text-white">{link.label}</p>
+                    <h3 className="text-sm font-semibold text-white">{link.label}</h3>
                     <p className="mt-2 text-sm leading-relaxed text-slate-200">{link.copy}</p>
                   </div>
                 </div>
