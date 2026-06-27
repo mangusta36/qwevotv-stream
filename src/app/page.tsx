@@ -65,10 +65,11 @@ const serviceSchema = {
 
 const sectionIcons = [Tv2, MonitorPlay, ShieldCheck, Sparkles];
 
+const featuredPosts = [...blogPosts]
+  .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
+  .slice(0, 3);
+
 export default function Home() {
-  const featuredPosts = [...blogPosts]
-    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
-    .slice(0, 3);
 
   return (
     <main className="min-h-screen bg-background text-white overflow-x-hidden">

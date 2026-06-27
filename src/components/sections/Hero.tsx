@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   ArrowRight,
   CheckCircle2,
@@ -17,7 +17,7 @@ import {
   Zap,
 } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SITE_NAME, WHATSAPP_URL } from "@/constants/content";
 
 const features = [
@@ -58,16 +58,7 @@ const stagger = {
 };
 
 function GlowOrb({ className }: { className: string }) {
-  return (
-    <motion.div
-      className={`absolute rounded-full ${className}`}
-      animate={{
-        scale: [1, 1.15, 1],
-        opacity: [0.4, 0.7, 0.4],
-      }}
-      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-    />
-  );
+  return <div className={`absolute rounded-full animate-glow ${className}`} />;
 }
 
 function LiveIndicator() {
@@ -90,20 +81,24 @@ function LiveIndicator() {
 
 function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
   const [count, setCount] = useState(0);
+  const lastRef = useRef(0);
   useEffect(() => {
-    let start = 0;
-    const dur = 2000;
-    const step = Math.ceil(target / (dur / 16));
-    const t = setInterval(() => {
-      start += step;
-      if (start >= target) {
-        setCount(target);
-        clearInterval(t);
-      } else {
-        setCount(start);
+    let rafId: number;
+    const startTime = performance.now();
+    const duration = 2000;
+    lastRef.current = 0;
+    function tick(now: number) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const current = Math.floor(progress * target);
+      if (current !== lastRef.current) {
+        lastRef.current = current;
+        setCount(current);
       }
-    }, 16);
-    return () => clearInterval(t);
+      if (progress < 1) rafId = requestAnimationFrame(tick);
+    }
+    rafId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId);
   }, [target]);
   return (
     <span>
@@ -114,10 +109,6 @@ function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
 }
 
 export default function Hero() {
-  const { scrollY } = useScroll();
-  const bgY = useTransform(scrollY, [0, 600], [0, 80]);
-  const fadeAway = useTransform(scrollY, [0, 400], [1, 0]);
-
   const heroMsg = encodeURIComponent(`Hello, I am interested in ${SITE_NAME}.`);
   const whatsappHref = `${WHATSAPP_URL}?text=${heroMsg}`;
 
@@ -128,25 +119,23 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen overflow-hidden bg-[#050816]"
     >
-      <motion.div
-        className="absolute inset-0 will-change-transform"
+      <div
+        className="absolute inset-0"
         style={{
           backgroundImage: "url('/images/hero-bg-new.webp')",
           backgroundSize: "cover",
           backgroundPosition: "center",
-          y: bgY,
         }}
       />
 
       <div className="absolute inset-0 bg-gradient-to-b from-[#050816]/60 via-[#050816]/40 to-[#050816]/90" />
       <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent" />
 
-      <motion.div
+      <div
         className="absolute inset-0"
         style={{
           backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)`,
           backgroundSize: "48px 48px",
-          opacity: fadeAway,
         }}
       />
 
@@ -395,18 +384,14 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      <motion.div
-        className="absolute bottom-6 left-1/2 -z-10 -translate-x-1/2"
-        animate={{ y: [0, 6, 0] }}
-        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <div className="flex flex-col items-center gap-1.5">
+      <div className="absolute bottom-6 left-1/2 -z-10 -translate-x-1/2">
+        <div className="animate-soft-bounce flex flex-col items-center gap-1.5">
           <span className="h-8 w-px bg-gradient-to-b from-white/20 to-transparent" />
           <span className="text-[8px] uppercase tracking-[0.3em] text-white/20">
             Scroll
           </span>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }
