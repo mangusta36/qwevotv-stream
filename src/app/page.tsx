@@ -75,9 +75,7 @@ export default function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <Navbar />
 
-      <section id="home">
-        <Hero />
-      </section>
+      <Hero />
 
       {/* --- PRICING SECTION --- */}
       <section id="pricing" className="section-shell py-12 md:py-20">
