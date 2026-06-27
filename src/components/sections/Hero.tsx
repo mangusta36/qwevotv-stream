@@ -20,7 +20,7 @@ export default function Hero() {
         />
       </div>
 
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-slate-950/60 via-slate-950/10 to-transparent" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/15 to-transparent" />
       <div className="absolute -right-40 top-1/3 -z-10 h-[500px] w-[500px] -translate-y-1/4 rounded-full bg-primary/20 blur-[120px]" />
       <div className="absolute inset-x-0 bottom-0 -z-10 h-36 bg-gradient-to-t from-background to-transparent" />
 

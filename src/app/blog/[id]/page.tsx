@@ -2,10 +2,20 @@ import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 import { Accordion } from "@/components/ui/Accordion";
 import { blogPosts } from "@/lib/posts";
-import { ArrowLeft, ArrowRight, Calendar, Clock3, List, User } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Calendar,
+  Clock3,
+  List,
+  User,
+} from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import NewsletterSection from "./NewsletterSection";
+import ShareButtons from "./ShareButtons";
+import SidebarShare from "./SidebarShare";
 
 const siteUrl = "https://www.qwevotv.pro";
 
@@ -22,35 +32,23 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   const post = blogPosts.find((item) => item.id === id);
 
   if (!post) {
-    return {
-      title: "Article not found",
-      robots: { index: false, follow: false },
-    };
+    return { title: "Article not found", robots: { index: false, follow: false } };
   }
 
-  const title = `${post.title}`;
+  const title = post.title;
   const description = post.excerpt.length > 155 ? post.excerpt.slice(0, 152) + "..." : post.excerpt;
 
   return {
     title,
     description,
-    alternates: {
-      canonical: `${siteUrl}/blog/${post.id}`,
-    },
+    alternates: { canonical: `${siteUrl}/blog/${post.id}` },
     openGraph: {
       title,
       description,
       type: "article",
       url: `${siteUrl}/blog/${post.id}`,
       siteName: "qwevo tv",
-      images: [
-        {
-          url: `${siteUrl}${post.image}`,
-          width: 1280,
-          height: 720,
-          alt: post.imageAlt,
-        },
-      ],
+      images: [{ url: `${siteUrl}${post.image}`, width: 1280, height: 720, alt: post.imageAlt }],
       publishedTime: post.publishedAt,
       modifiedTime: post.dateModified,
       authors: [post.author],
@@ -61,12 +59,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       card: "summary_large_image",
       title,
       description,
-      images: [
-        {
-          url: `${siteUrl}${post.image}`,
-          alt: post.imageAlt,
-        },
-      ],
+      images: [{ url: `${siteUrl}${post.image}`, alt: post.imageAlt }],
     },
     robots: {
       index: true,
@@ -79,17 +72,14 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
         "max-snippet": -1,
       },
     },
-    keywords: [
-      post.category.toLowerCase(),
-      "IPTV",
-      "qwevo tv",
-      "streaming",
-      "setup guide",
-    ],
+    keywords: [post.category.toLowerCase(), "IPTV", "qwevo tv", "streaming", "setup guide"],
   };
 }
 
-function renderParagraphs(paragraphs: string[], contentLinks?: { paragraphIndex: number; html: string }[]) {
+function renderParagraphs(
+  paragraphs: string[],
+  contentLinks?: { paragraphIndex: number; html: string }[]
+) {
   if (!contentLinks || contentLinks.length === 0) {
     return paragraphs.map((paragraph, index) => (
       <p key={index} dangerouslySetInnerHTML={{ __html: paragraph }} />
@@ -116,6 +106,14 @@ function renderParagraphs(paragraphs: string[], contentLinks?: { paragraphIndex:
 
 function categorySlug(category: string): string | null {
   const map: Record<string, string> = {
+    Setup: "setup",
+    Devices: "devices",
+    Troubleshooting: "troubleshooting",
+    "Buying guide": "buying-guide",
+    Sports: "sports",
+    Mobile: "mobile",
+    Features: "features",
+    Support: "support",
     "IPTV Apps": "iptv-apps",
     "IPTV Technology": "iptv-technology",
   };
@@ -133,7 +131,10 @@ export default async function BlogPostDetail({ params }: BlogPostPageProps) {
         <section className="section-shell flex min-h-[60vh] flex-col items-start justify-center pt-28">
           <p className="text-sm font-semibold uppercase tracking-[0.24em] text-primary">Blog</p>
           <h1 className="mt-4 text-3xl font-black text-white">Article not found.</h1>
-          <Link href="/blog" className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-primary px-5 py-3 text-sm font-semibold text-slate-950">
+          <Link
+            href="/blog"
+            className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-primary px-5 py-3 text-sm font-semibold text-slate-950"
+          >
             <ArrowLeft className="h-4 w-4" />
             Back to blog
           </Link>
@@ -142,6 +143,10 @@ export default async function BlogPostDetail({ params }: BlogPostPageProps) {
       </main>
     );
   }
+
+  const currentIndex = blogPosts.findIndex((p) => p.id === post.id);
+  const prevPost = currentIndex > 0 ? blogPosts[currentIndex - 1] : null;
+  const nextPost = currentIndex < blogPosts.length - 1 ? blogPosts[currentIndex + 1] : null;
 
   const relatedPosts = blogPosts
     .filter((item) => item.id !== post.id)
@@ -152,6 +157,8 @@ export default async function BlogPostDetail({ params }: BlogPostPageProps) {
     })
     .slice(0, 3);
 
+  const articleUrl = `${siteUrl}/blog/${post.id}`;
+
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -160,7 +167,12 @@ export default async function BlogPostDetail({ params }: BlogPostPageProps) {
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Home", item: "https://www.qwevotv.pro" },
           { "@type": "ListItem", position: 2, name: "Blog", item: "https://www.qwevotv.pro/blog" },
-          { "@type": "ListItem", position: 3, name: post.title, item: `https://www.qwevotv.pro/blog/${post.id}` },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: post.title,
+            item: `https://www.qwevotv.pro/blog/${post.id}`,
+          },
         ],
       },
       {
@@ -212,21 +224,42 @@ export default async function BlogPostDetail({ params }: BlogPostPageProps) {
     ],
   };
 
+  const sectionCount = post.sections.length;
+
   return (
     <main className="min-h-screen bg-background text-white">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <Navbar />
 
       <section className="section-shell pt-32 md:pt-36">
-        <Link href="/blog" className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.24em] text-primary transition-colors hover:text-white">
-          <ArrowLeft className="h-4 w-4" />
-          Back to blog
-        </Link>
+        <nav className="flex flex-wrap items-center gap-2 text-xs text-slate-400">
+          <Link href="/" className="transition-colors hover:text-white">
+            Home
+          </Link>
+          <span>/</span>
+          <Link href="/blog" className="transition-colors hover:text-white">
+            Blog
+          </Link>
+          <span>/</span>
+          <span className="text-slate-500">{post.title}</span>
+        </nav>
 
         <div className="mt-8 grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
           <div className="space-y-5">
             <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.22em] text-slate-500">
-              <Link href={categorySlug(post.category) ? `/blog/${categorySlug(post.category)}` : "/blog"} className="transition-colors hover:text-primary">{post.category}</Link>
+              <Link
+                href={
+                  categorySlug(post.category)
+                    ? `/blog/${categorySlug(post.category)}`
+                    : "/blog"
+                }
+                className="transition-colors hover:text-primary"
+              >
+                {post.category}
+              </Link>
               <span>{post.displayDate}</span>
               <span>{post.readTime}</span>
             </div>
@@ -255,6 +288,8 @@ export default async function BlogPostDetail({ params }: BlogPostPageProps) {
                 {post.coverLabel}
               </span>
             </div>
+
+            <ShareButtons url={articleUrl} title={post.title} />
           </div>
 
           <div className="surface-panel overflow-hidden">
@@ -272,7 +307,16 @@ export default async function BlogPostDetail({ params }: BlogPostPageProps) {
               <div className="absolute inset-0 bg-slate-950/50" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/76 via-transparent to-transparent" />
               <div className="absolute bottom-5 left-5 right-5">
-                <Link href={categorySlug(post.category) ? `/blog/${categorySlug(post.category)}` : "/blog"} className="text-xs uppercase tracking-[0.22em] text-primary transition-colors hover:text-primary-light">{post.category}</Link>
+                <Link
+                  href={
+                    categorySlug(post.category)
+                      ? `/blog/${categorySlug(post.category)}`
+                      : "/blog"
+                  }
+                  className="text-xs uppercase tracking-[0.22em] text-primary transition-colors hover:text-primary-light"
+                >
+                  {post.category}
+                </Link>
                 <p className="mt-2 text-2xl font-semibold text-white">{post.coverLabel}</p>
               </div>
             </div>
@@ -282,29 +326,51 @@ export default async function BlogPostDetail({ params }: BlogPostPageProps) {
 
       <section className="section-shell py-10">
         <div className="grid gap-6 lg:grid-cols-[280px_minmax(0,1fr)]">
-          <aside className="lg:sticky lg:top-28 lg:self-start">
+          <aside className="hidden lg:sticky lg:top-28 lg:block lg:self-start">
             <div className="surface-panel p-5">
               <div className="flex items-center gap-2 text-sm font-semibold text-white">
                 <List className="h-4 w-4 text-primary" />
-                Table of contents
+                On this page
               </div>
-              <nav className="mt-4 space-y-2">
+              <nav className="mt-4 space-y-1">
                 {post.sections.map((section) => (
-                  <a key={section.id} href={`#${section.id}`} className="block rounded-xl px-3 py-2 text-sm leading-snug text-slate-300 transition-colors hover:bg-white/[0.05] hover:text-white">
+                  <a
+                    key={section.id}
+                    href={`#${section.id}`}
+                    className="block rounded-xl px-3 py-2 text-sm leading-snug text-slate-300 transition-colors hover:bg-white/[0.05] hover:text-white"
+                  >
                     {section.heading}
                   </a>
                 ))}
+                <a
+                  href="#faq"
+                  className="block rounded-xl px-3 py-2 text-sm leading-snug text-slate-300 transition-colors hover:bg-white/[0.05] hover:text-white"
+                >
+                  FAQ
+                </a>
               </nav>
             </div>
+
+            <SidebarShare url={articleUrl} title={post.title} />
           </aside>
 
           <article className="space-y-6">
-            {post.sections.map((section) => {
+            {post.sections.map((section, idx) => {
               const HeadingTag = section.level === 2 ? "h2" : "h3";
 
               return (
-                <section key={section.heading} id={section.id} className="scroll-mt-28 rounded-[2rem] border border-white/10 bg-white/[0.035] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.22)] md:p-8">
-                  <HeadingTag className={section.level === 2 ? "text-2xl font-black leading-tight text-white md:text-4xl" : "text-xl font-semibold text-white md:text-2xl"}>
+                <section
+                  key={section.heading}
+                  id={section.id}
+                  className="scroll-mt-28 rounded-[2rem] border border-white/10 bg-white/[0.035] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.22)] md:p-8"
+                >
+                  <HeadingTag
+                    className={
+                      section.level === 2
+                        ? "text-2xl font-black leading-tight text-white md:text-4xl"
+                        : "text-xl font-semibold text-white md:text-2xl"
+                    }
+                  >
                     {section.heading}
                   </HeadingTag>
                   {section.image ? (
@@ -327,7 +393,10 @@ export default async function BlogPostDetail({ params }: BlogPostPageProps) {
                   {section.bullets ? (
                     <ul className="mt-6 grid gap-3 md:grid-cols-2">
                       {section.bullets.map((bullet) => (
-                        <li key={bullet} className="flex gap-3 rounded-2xl border border-white/10 bg-slate-950/60 p-4 text-sm leading-relaxed text-slate-300">
+                        <li
+                          key={bullet}
+                          className="flex gap-3 rounded-2xl border border-white/10 bg-slate-950/60 p-4 text-sm leading-relaxed text-slate-300"
+                        >
                           <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary" />
                           <span>{bullet}</span>
                         </li>
@@ -339,6 +408,30 @@ export default async function BlogPostDetail({ params }: BlogPostPageProps) {
                       {section.note}
                     </div>
                   ) : null}
+
+                  {idx > 0 && idx % 3 === 0 ? (
+                    <div className="mt-6 rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/10 via-slate-950 to-secondary/10 p-5 text-center">
+                      <p className="text-sm font-semibold text-white">
+                        Ready to start streaming?
+                      </p>
+                      <div className="mt-3 flex flex-wrap justify-center gap-3">
+                        <a
+                          href="https://wa.me/447828714977?text=Hello%20I%20want%20to%20try%20qwevo%20tv"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="rounded-2xl bg-primary px-5 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-primary-light"
+                        >
+                          Start IPTV Trial
+                        </a>
+                        <Link
+                          href="/pricing"
+                          className="rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-3 text-sm font-semibold text-white transition-colors hover:border-primary/60"
+                        >
+                          Buy IPTV
+                        </Link>
+                      </div>
+                    </div>
+                  ) : null}
                 </section>
               );
             })}
@@ -346,15 +439,21 @@ export default async function BlogPostDetail({ params }: BlogPostPageProps) {
         </div>
       </section>
 
+      <NewsletterSection />
+
       <section id="faq" className="section-shell pb-14 md:pb-20">
         <div className="grid gap-6 lg:grid-cols-[1fr_0.9fr]">
           <div className="surface-panel p-6 md:p-8">
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">FAQ</p>
-            <h2 className="mt-3 text-2xl font-semibold text-white">Frequently asked questions about {post.category.toLowerCase()}</h2>
+            <h2 className="mt-3 text-2xl font-semibold text-white">
+              Frequently asked questions about {post.category.toLowerCase()}
+            </h2>
             <Accordion items={post.faqs} className="mt-6" />
           </div>
           <div className="surface-panel p-6 md:p-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">Next step</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">
+              Next step
+            </p>
             <h2 className="mt-3 text-2xl font-semibold text-white">
               {post.category === "Setup" || post.category === "Devices"
                 ? "Finished the guide? Check plans or get help."
@@ -383,7 +482,11 @@ export default async function BlogPostDetail({ params }: BlogPostPageProps) {
             </p>
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
               {post.relatedLinks.map((link) => (
-                <Link key={link.href} href={link.href} className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-sm text-white transition-colors hover:border-primary/60">
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-sm text-white transition-colors hover:border-primary/60"
+                >
                   <div className="flex items-center justify-between gap-3">
                     <span>{link.label}</span>
                     <ArrowRight className="h-4 w-4 text-primary" />
@@ -395,14 +498,61 @@ export default async function BlogPostDetail({ params }: BlogPostPageProps) {
         </div>
       </section>
 
+      {prevPost || nextPost ? (
+        <section className="section-shell pb-14">
+          <div className="grid gap-4 sm:grid-cols-2">
+            {prevPost ? (
+              <Link
+                href={`/blog/${prevPost.id}`}
+                className="surface-panel flex flex-col gap-2 p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/60"
+              >
+                <span className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+                  <ArrowLeft className="h-4 w-4" />
+                  Previous article
+                </span>
+                <span className="text-lg font-semibold text-white">{prevPost.title}</span>
+                <span className="text-sm text-slate-400">
+                  {prevPost.category} &middot; {prevPost.readTime}
+                </span>
+              </Link>
+            ) : (
+              <div />
+            )}
+            {nextPost ? (
+              <Link
+                href={`/blog/${nextPost.id}`}
+                className="surface-panel flex flex-col gap-2 p-6 text-right transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/60"
+              >
+                <span className="flex items-center justify-end gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+                  Next article
+                  <ArrowRight className="h-4 w-4" />
+                </span>
+                <span className="text-lg font-semibold text-white">{nextPost.title}</span>
+                <span className="text-sm text-slate-400">
+                  {nextPost.category} &middot; {nextPost.readTime}
+                </span>
+              </Link>
+            ) : (
+              <div />
+            )}
+          </div>
+        </section>
+      ) : null}
+
       <section className="section-shell pb-14 md:pb-20">
         <div className="mb-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">Related articles</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">
+            Related articles
+          </p>
           <h2 className="mt-3 text-3xl font-black text-white">Keep reading</h2>
         </div>
         <div className="grid gap-4 md:grid-cols-3">
           {relatedPosts.map((item) => (
-            <Link key={item.id} href={`/blog/${item.id}`} className="group surface-panel overflow-hidden transition-colors hover:border-primary/60">
+            <Link
+              key={item.id}
+              href={`/blog/${item.id}`}
+              className="group surface-panel overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-primary/60 hover:shadow-[0_24px_60px_rgba(56,189,248,0.08)]"
+            >
               <div className="relative aspect-[16/10]">
                 <Image
                   src={item.image}
@@ -417,7 +567,9 @@ export default async function BlogPostDetail({ params }: BlogPostPageProps) {
                 <div className="absolute inset-0 bg-slate-950/50" />
               </div>
               <div className="p-5">
-                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">{item.category}</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+                  {item.category}
+                </p>
                 <h3 className="mt-3 text-lg font-semibold text-white">{item.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-slate-300">{item.excerpt}</p>
               </div>
