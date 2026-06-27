@@ -183,9 +183,8 @@ export default function Hero() {
               variants={fadeUp}
               custom={1}
             >
-              Watch{" "}
               <span className="bg-gradient-to-r from-[#22D3EE] via-[#14B8FF] to-[#2563EB] bg-clip-text text-transparent">
-                Live TV, Sports & Movies
+                qwevo tv — Live TV, Sports & Movies
               </span>
               <br className="hidden sm:inline" />
               in Stunning 4K
@@ -196,9 +195,9 @@ export default function Hero() {
               variants={fadeUp}
               custom={2}
             >
-              Premium IPTV with 26,000+ live channels, 100,000+ VOD titles, and
-              instant activation. Stream on every device with anti-freeze
-              technology and 24/7 support.
+              qwevo tv delivers premium IPTV with 26,000+ live channels, 100,000+
+              VOD titles, and instant activation. Stream on every device with
+              anti-freeze technology and 24/7 support.
             </motion.p>
 
             <motion.div
@@ -216,7 +215,7 @@ export default function Hero() {
               >
                 <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full transition-transform duration-700 group-hover:translate-x-full" />
                 <Play className="h-4 w-4 fill-current" />
-                <span className="relative">Get Started</span>
+                <span className="relative">Get Trial</span>
                 <ArrowRight className="relative h-4 w-4 transition-transform group-hover:translate-x-1" />
               </motion.a>
               <Link
