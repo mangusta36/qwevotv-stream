@@ -208,6 +208,8 @@ export default async function BlogPostDetail({ params }: BlogPostPageProps) {
           "@type": "WebPage",
           "@id": `https://www.qwevotv.pro/blog/${post.id}`,
         },
+        keywords: ["IPTV", post.category, ...post.title.toLowerCase().split(" ").slice(0, 6)],
+        articleSection: post.category,
       },
       {
         "@type": "FAQPage",

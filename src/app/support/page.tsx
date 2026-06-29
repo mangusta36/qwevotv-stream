@@ -14,6 +14,30 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://www.qwevotv.pro/support",
   },
+  openGraph: {
+    title: "qwevo tv IPTV Support – Setup Help & Troubleshooting",
+    description:
+      "Get qwevo tv support for quick IPTV setup, renewals, device guidance, and troubleshooting. Contact us via WhatsApp for fast, friendly help.",
+    url: "https://www.qwevotv.pro/support",
+    siteName: "qwevo tv",
+    type: "website",
+    locale: "en_US",
+    images: [
+      {
+        url: "https://www.qwevotv.pro/images/android-devices.webp",
+        width: 1280,
+        height: 860,
+        alt: "qwevo tv IPTV support and help center",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "qwevo tv IPTV Support – Setup Help & Troubleshooting",
+    description:
+      "Get qwevo tv support for IPTV setup, renewals, device guidance, and troubleshooting via WhatsApp.",
+    images: ["https://www.qwevotv.pro/images/android-devices.webp"],
+  },
 };
 
 const supportSchema = {

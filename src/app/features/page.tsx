@@ -18,11 +18,35 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Qwevo TV IPTV Features & Device Support Guide",
+  title: "qwevo tv IPTV Features & Device Support Guide",
   description:
-    "Explore Qwevo TV premium IPTV features for Smart TV, Fire Stick, and Android TV. Learn about stable 4K playback, device compatibility, and responsive WhatsApp support.",
+    "Explore qwevo tv premium IPTV features for Smart TV, Fire Stick, and Android TV. Learn about stable 4K playback, device compatibility, and responsive WhatsApp support.",
   alternates: {
     canonical: "https://www.qwevotv.pro/features",
+  },
+  openGraph: {
+    title: "qwevo tv IPTV Features & Device Support Guide",
+    description:
+      "Explore qwevo tv premium IPTV features for Smart TV, Fire Stick, and Android TV. Learn about stable 4K playback, device compatibility, and responsive WhatsApp support.",
+    url: "https://www.qwevotv.pro/features",
+    siteName: "qwevo tv",
+    type: "website",
+    locale: "en_US",
+    images: [
+      {
+        url: "https://www.qwevotv.pro/images/iptv-streaming.webp",
+        width: 1280,
+        height: 860,
+        alt: "qwevo tv premium IPTV features overview",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "qwevo tv IPTV Features & Device Support Guide",
+    description:
+      "Explore qwevo tv premium IPTV features for Smart TV, Fire Stick, and Android TV with stable 4K playback and WhatsApp support.",
+    images: ["https://www.qwevotv.pro/images/iptv-streaming.webp"],
   },
 };
 
@@ -31,25 +55,25 @@ const featureSections = [
     title: "Fast setup",
     icon: Zap,
     body:
-      "Qwevo TV is built for a quick IPTV setup from the moment you choose a plan. After confirmation, activation details are shared through a simple support flow so you can move from purchase to watching without sorting through confusing technical steps. The setup process is designed for common IPTV streaming apps and popular living-room devices, including Smart TV IPTV apps, Fire TV IPTV apps, Android TV IPTV players, phones, and tablets. If you already use IPTV Smarters or TiviMate, support can guide you on where to add your login details and how to organize the first launch. The goal is practical: clear instructions, fewer delays, and a setup path that makes sense even if this is your first premium IPTV subscription.",
+      "qwevo tv is built for a quick IPTV setup from the moment you choose a plan. After confirmation, activation details are shared through a simple support flow so you can move from purchase to watching without sorting through confusing technical steps. The setup process is designed for common IPTV streaming apps and popular living-room devices, including Smart TV IPTV apps, Fire TV IPTV apps, Android TV IPTV players, phones, and tablets. If you already use IPTV Smarters or TiviMate, support can guide you on where to add your login details and how to organize the first launch. The goal is practical: clear instructions, fewer delays, and a setup path that makes sense even if this is your first premium IPTV subscription.",
   },
   {
     title: "Stable playback",
     icon: Wifi,
     body:
-      "Stable IPTV playback matters most when you are watching live sports, weekend movies, or a series episode everyone has been waiting to see. Qwevo TV focuses on a smoother daily IPTV streaming experience with clear device guidance, app recommendations, and troubleshooting steps when a connection or player setting needs attention. Playback quality can depend on your internet speed, Wi-Fi signal, device performance, and the IPTV app you choose, so support helps you check the simple causes first. That includes restarting the app, testing another network, checking player settings, and choosing a reliable device for longer sessions. The result is a service experience centered on consistency, not just a long list of channels.",
+      "Stable IPTV playback matters most when you are watching live sports, weekend movies, or a series episode everyone has been waiting to see. qwevo tv focuses on a smoother daily IPTV streaming experience with clear device guidance, app recommendations, and troubleshooting steps when a connection or player setting needs attention. Playback quality can depend on your internet speed, Wi-Fi signal, device performance, and the IPTV app you choose, so support helps you check the simple causes first. That includes restarting the app, testing another network, checking player settings, and choosing a reliable device for longer sessions. The result is a service experience centered on consistency, not just a long list of channels.",
   },
   {
     title: "All major devices",
     icon: MonitorSmartphone,
     body:
-      "Qwevo TV supports the devices people actually use at home and on the move. You can set up premium IPTV on Samsung Smart TV, LG Smart TV, Android TV, Fire TV Stick, Google TV, smartphones, and tablets. Many customers prefer Smart TV IPTV for the living room, Fire TV IPTV for an easy plug-in setup, or Android TV IPTV when they want flexible app options. Qwevo TV also works with familiar IPTV players such as IPTV Smarters and TiviMate, depending on your device and preference. This broad compatibility makes it easier to keep one subscription experience across multiple screens while still choosing the app that feels best with your remote, touchscreen, or streaming device.",
+      "qwevo tv supports the devices people actually use at home and on the move. You can set up premium IPTV on Samsung Smart TV, LG Smart TV, Android TV, Fire TV Stick, Google TV, smartphones, and tablets. Many customers prefer Smart TV IPTV for the living room, Fire TV IPTV for an easy plug-in setup, or Android TV IPTV when they want flexible app options. qwevo tv also works with familiar IPTV players such as IPTV Smarters and TiviMate, depending on your device and preference. This broad compatibility makes it easier to keep one subscription experience across multiple screens while still choosing the app that feels best with your remote, touchscreen, or streaming device.",
   },
   {
     title: "Helpful support",
     icon: MessageCircle,
     body:
-      "Good IPTV support should be easy to reach and clear about the next step. Qwevo TV uses WhatsApp support for activation questions, device setup guidance, billing help, renewal questions, and playback troubleshooting. Instead of leaving you to guess which app or setting is right, support can point you toward a practical setup path for Smart TV IPTV, Fire TV Stick, Android TV, mobile devices, IPTV Smarters, or TiviMate. If playback buffers, if an app asks for details in a different format, or if you are unsure which plan fits your needs, the support channel keeps the conversation simple. It is a useful layer of the service, especially for customers who want premium IPTV without complicated configuration.",
+      "Good IPTV support should be easy to reach and clear about the next step. qwevo tv uses WhatsApp support for activation questions, device setup guidance, billing help, renewal questions, and playback troubleshooting. Instead of leaving you to guess which app or setting is right, support can point you toward a practical setup path for Smart TV IPTV, Fire TV Stick, Android TV, mobile devices, IPTV Smarters, or TiviMate. If playback buffers, if an app asks for details in a different format, or if you are unsure which plan fits your needs, the support channel keeps the conversation simple. It is a useful layer of the service, especially for customers who want premium IPTV without complicated configuration.",
   },
 ];
 
@@ -90,9 +114,9 @@ const supportCards = [
 
 const faqs = [
   {
-    question: "What devices does Qwevo TV support?",
+    question: "What devices does qwevo tv support?",
     answer:
-      "Qwevo TV supports Samsung Smart TV, LG Smart TV, Android TV, Fire TV Stick, Google TV, smartphones, tablets, IPTV Smarters, and TiviMate.",
+      "qwevo tv supports Samsung Smart TV, LG Smart TV, Android TV, Fire TV Stick, Google TV, smartphones, tablets, IPTV Smarters, and TiviMate.",
   },
   {
     question: "How fast is IPTV activation?",
@@ -100,14 +124,14 @@ const faqs = [
       "Most IPTV setup details are shared quickly after confirmation, and WhatsApp support can guide you through the first launch on your chosen device.",
   },
   {
-    question: "Does Qwevo TV work on Fire TV Stick?",
+    question: "Does qwevo tv work on Fire TV Stick?",
     answer:
-      "Yes. Fire TV IPTV setup is one of the common ways to use Qwevo TV, especially for customers who want a simple streaming device connected to the television.",
+      "Yes. Fire TV IPTV setup is one of the common ways to use qwevo tv, especially for customers who want a simple streaming device connected to the television.",
   },
   {
-    question: "Can I use Qwevo TV on Smart TV?",
+    question: "Can I use qwevo tv on Smart TV?",
     answer:
-      "Yes. Qwevo TV works with Smart TV IPTV apps on supported Samsung and LG models, and support can help you choose the right setup route.",
+      "Yes. qwevo tv works with Smart TV IPTV apps on supported Samsung and LG models, and support can help you choose the right setup route.",
   },
   {
     question: "Do you offer WhatsApp support?",
@@ -115,7 +139,7 @@ const faqs = [
       "Yes. WhatsApp support is available for IPTV activation, device setup guidance, billing questions, renewal help, and troubleshooting.",
   },
   {
-    question: "Is Qwevo TV easy to set up?",
+    question: "Is qwevo tv easy to set up?",
     answer:
       "Yes. The setup process is designed to be direct, with clear guidance for popular IPTV apps and devices such as Smart TVs, Fire TV Stick, Android TV, phones, and tablets.",
   },
@@ -144,7 +168,7 @@ const featuresSchema = {
     {
       "@type": "AboutPage",
       "@id": "https://www.qwevotv.pro/features#aboutpage",
-      name: "Qwevo TV Premium IPTV Features and Device Support",
+      name: "qwevo tv Premium IPTV Features and Device Support",
       description: "Premium IPTV features including fast setup, stable playback, device compatibility, and 24/7 support.",
     },
   ],
@@ -161,10 +185,10 @@ export default function FeaturesPage() {
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">Features</p>
             <h1 className="mt-4 max-w-3xl text-4xl font-black leading-tight text-white md:text-6xl">
-              Qwevo TV Premium IPTV Features and Device Support
+              qwevo tv Premium IPTV Features and Device Support
             </h1>
             <p className="mt-5 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-              Qwevo TV brings premium IPTV features, broad device compatibility, stable IPTV playback guidance, and responsive support into one clean experience. Compare setup options, check supported devices, and move naturally from features to{" "}
+              qwevo tv brings premium IPTV features, broad device compatibility, stable IPTV playback guidance, and responsive support into one clean experience. Compare setup options, check supported devices, and move naturally from features to{" "}
               <Link href="/pricing" className="font-semibold text-primary hover:text-sky-300">
                 pricing
               </Link>
@@ -210,7 +234,7 @@ export default function FeaturesPage() {
               <h2 className="text-2xl font-semibold text-white">Device compatibility</h2>
             </div>
             <p className="mt-4 text-sm leading-7 text-slate-300">
-              Qwevo TV is designed for flexible IPTV streaming across the screens people already own. Use it on a main Smart TV, a Fire TV Stick in another room, an Android TV box, Google TV, or mobile devices when you want access away from the sofa. Compatibility also includes popular IPTV player apps such as IPTV Smarters and TiviMate.
+              qwevo tv is designed for flexible IPTV streaming across the screens people already own. Use it on a main Smart TV, a Fire TV Stick in another room, an Android TV box, Google TV, or mobile devices when you want access away from the sofa. Compatibility also includes popular IPTV player apps such as IPTV Smarters and TiviMate.
             </p>
             <div className="mt-6 flex flex-wrap gap-2">
               {devices.map((device) => (
@@ -229,7 +253,7 @@ export default function FeaturesPage() {
             <p className="mt-4 text-sm leading-7 text-slate-300">
               A living-room setup usually starts with Smart TV IPTV, Fire TV IPTV, or Android TV IPTV. Mobile users can use smartphones or tablets for a smaller screen experience, while IPTV Smarters and TiviMate are common player choices for customers who want familiar navigation. For plan details, visit the{" "}
               <Link href="/pricing" className="font-semibold text-primary hover:text-sky-300">
-                Qwevo TV pricing page
+                qwevo tv pricing page
               </Link>
               . For practical setup reading, browse the{" "}
               <Link href="/blog" className="font-semibold text-primary hover:text-sky-300">
@@ -246,7 +270,7 @@ export default function FeaturesPage() {
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">Support</p>
           <h2 className="mt-3 text-3xl font-semibold text-white">IPTV support that stays clear after activation.</h2>
           <p className="mt-4 text-sm leading-7 text-slate-300">
-            Qwevo TV support helps with the parts of premium IPTV that matter after you order: WhatsApp activation, device setup guidance, billing help, and troubleshooting when playback or app settings need attention.
+            qwevo tv support helps with the parts of premium IPTV that matter after you order: WhatsApp activation, device setup guidance, billing help, and troubleshooting when playback or app settings need attention.
           </p>
         </div>
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -295,7 +319,7 @@ export default function FeaturesPage() {
       <section className="section-shell pb-14 md:pb-20">
         <div className="mb-6 max-w-3xl">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">FAQ</p>
-          <h2 className="mt-3 text-3xl font-semibold text-white">Qwevo TV features and device support FAQ</h2>
+          <h2 className="mt-3 text-3xl font-semibold text-white">qwevo tv features and device support FAQ</h2>
         </div>
         <div className="grid gap-4 md:grid-cols-2">
           {faqs.map((item) => (

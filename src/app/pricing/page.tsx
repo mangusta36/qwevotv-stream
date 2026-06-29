@@ -13,6 +13,30 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://www.qwevotv.pro/pricing",
   },
+  openGraph: {
+    title: "qwevo tv IPTV Pricing – Compare Subscription Plans",
+    description:
+      "Compare qwevo tv subscription plans with transparent pricing and flexible device support. Choose from 3, 6, or 12-month IPTV plans starting at just €37.",
+    url: "https://www.qwevotv.pro/pricing",
+    siteName: "qwevo tv",
+    type: "website",
+    locale: "en_US",
+    images: [
+      {
+        url: "https://www.qwevotv.pro/images/4k-entertainment.webp",
+        width: 1280,
+        height: 860,
+        alt: "qwevo tv IPTV pricing plans",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "qwevo tv IPTV Pricing – Compare Subscription Plans",
+    description:
+      "Compare qwevo tv subscription plans with transparent pricing. Choose from 3, 6, or 12-month IPTV plans starting at just €37.",
+    images: ["https://www.qwevotv.pro/images/4k-entertainment.webp"],
+  },
 };
 
 const pricingSchema = {
