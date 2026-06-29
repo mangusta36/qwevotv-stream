@@ -49,6 +49,37 @@ section { scroll-margin-top: 96px; }
   animation: glow 6s ease-in-out infinite;
 }
 
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-in-up {
+  opacity: 0;
+  animation: fade-in-up 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: calc(var(--i, 0) * 0.1s);
+}
+
+@keyframes fade-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.animate-fade-in-right {
+  opacity: 0;
+  animation: fade-in-right 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards;
+}
+
 @keyframes soft-bounce {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(6px); }

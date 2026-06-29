@@ -1,7 +1,7 @@
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 import { blogPosts } from "@/lib/posts";
-import { ArrowRight, Calendar, Clock3, User } from "lucide-react";
+import { Calendar, Clock3, User } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";

@@ -226,8 +226,6 @@ export default async function BlogPostDetail({ params }: BlogPostPageProps) {
     ],
   };
 
-  const sectionCount = post.sections.length;
-
   return (
     <main className="min-h-screen bg-background text-white">
       <script

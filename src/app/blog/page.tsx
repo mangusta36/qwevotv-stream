@@ -3,7 +3,7 @@
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 import { blogPosts } from "@/lib/posts";
-import { ArrowRight, Calendar, ChevronLeft, ChevronRight, Clock3, Search, TrendingUp, User } from "lucide-react";
+import { Calendar, ChevronLeft, ChevronRight, Clock3, Search, TrendingUp, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";

@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import {
   ArrowRight,
   CheckCircle2,
@@ -17,7 +16,7 @@ import {
   Zap,
 } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { SITE_NAME, WHATSAPP_URL } from "@/constants/content";
 
 const features = [
@@ -40,72 +39,54 @@ const devices = [
   { name: "iPad", icon: Smartphone },
 ];
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94], delay: i * 0.1 },
-  }),
-};
-
-const stagger = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.08, delayChildren: 0.15 },
-  },
-};
-
 function GlowOrb({ className }: { className: string }) {
   return <div className={`absolute rounded-full animate-glow ${className}`} />;
 }
 
 function LiveIndicator() {
-  const [active, setActive] = useState(true);
+  const dotRef = useRef<HTMLSpanElement>(null);
+  const pingRef = useRef<HTMLSpanElement>(null);
   useEffect(() => {
-    const t = setInterval(() => setActive((v) => !v), 1200);
+    const t = setInterval(() => {
+      if (dotRef.current) dotRef.current.classList.toggle("opacity-100");
+      if (dotRef.current) dotRef.current.classList.toggle("opacity-40");
+      if (pingRef.current) pingRef.current.classList.toggle("opacity-75");
+      if (pingRef.current) pingRef.current.classList.toggle("opacity-0");
+    }, 1200);
     return () => clearInterval(t);
   }, []);
   return (
     <span className="relative flex h-2 w-2">
       <span
-        className={`absolute inline-flex h-full w-full rounded-full bg-[#22D3EE] ${active ? "opacity-100" : "opacity-40"} transition-opacity`}
+        ref={dotRef}
+        className="absolute inline-flex h-full w-full rounded-full bg-[#22D3EE] opacity-100 transition-opacity duration-500"
       />
       <span
-        className={`absolute inline-flex h-full w-full animate-ping rounded-full bg-[#22D3EE] ${active ? "opacity-75" : "opacity-0"} transition-opacity`}
+        ref={pingRef}
+        className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#22D3EE] opacity-75 transition-opacity duration-500"
       />
     </span>
   );
 }
 
 function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
-  const [count, setCount] = useState(0);
-  const lastRef = useRef(0);
+  const ref = useRef<HTMLSpanElement>(null);
   useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
     let rafId: number;
     const startTime = performance.now();
     const duration = 2000;
-    lastRef.current = 0;
     function tick(now: number) {
       const elapsed = now - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      const current = Math.floor(progress * target);
-      if (current !== lastRef.current) {
-        lastRef.current = current;
-        setCount(current);
-      }
+      el.textContent = `${Math.floor(progress * target).toLocaleString()}${suffix}`;
       if (progress < 1) rafId = requestAnimationFrame(tick);
     }
     rafId = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafId);
-  }, [target]);
-  return (
-    <span>
-      {count.toLocaleString()}
-      {suffix}
-    </span>
-  );
+  }, [target, suffix]);
+  return <span ref={ref}>0{suffix}</span>;
 }
 
 export default function Hero() {
@@ -161,84 +142,59 @@ export default function Hero() {
 
       <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-center px-6 sm:px-8">
         <div className="grid items-center gap-16 lg:grid-cols-[1fr_auto] lg:py-24">
-          <motion.div
-            className="max-w-2xl pt-24 sm:pt-28 lg:pt-0"
-            initial="hidden"
-            animate="visible"
-            variants={stagger}
-          >
-            <motion.div
-              className="inline-flex items-center gap-2.5 rounded-full border border-[#14B8FF]/20 bg-[#14B8FF]/8 px-4 py-1.5 backdrop-blur-md"
-              variants={fadeUp}
-              custom={0}
-            >
-              <Zap className="h-3.5 w-3.5 text-[#14B8FF]" />
-              <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#14B8FF]">
-                Premium IPTV Experience
-              </span>
-            </motion.div>
+          <div className="max-w-2xl pt-24 sm:pt-28 lg:pt-0">
+            <div className="animate-fade-in-up" style={{ "--i": 0 } as React.CSSProperties}>
+              <div className="inline-flex items-center gap-2.5 rounded-full border border-[#14B8FF]/20 bg-[#14B8FF]/8 px-4 py-1.5 backdrop-blur-md">
+                <Zap className="h-3.5 w-3.5 text-[#14B8FF]" />
+                <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#14B8FF]">
+                  Premium IPTV Experience
+                </span>
+              </div>
+            </div>
 
-            <motion.h1
-              className="mt-5 text-[clamp(2rem,7vw,4.5rem)] font-black leading-[1.04] tracking-tight text-white"
-              variants={fadeUp}
-              custom={1}
-            >
+            <h1 className="animate-fade-in-up mt-5 text-[clamp(2rem,7vw,4.5rem)] font-black leading-[1.04] tracking-tight text-white" style={{ "--i": 1 } as React.CSSProperties}>
               <span className="bg-gradient-to-r from-[#22D3EE] via-[#14B8FF] to-[#2563EB] bg-clip-text text-transparent">
                 qwevo tv — Live TV, Sports & Movies
               </span>
               <br className="hidden sm:inline" />
               in Stunning 4K
-            </motion.h1>
+            </h1>
 
-            <motion.p
-              className="mt-4 max-w-lg text-base leading-relaxed text-slate-300/80 sm:text-lg"
-              variants={fadeUp}
-              custom={2}
-            >
+            <p className="animate-fade-in-up mt-4 max-w-lg text-base leading-relaxed text-slate-300/80 sm:text-lg" style={{ "--i": 2 } as React.CSSProperties}>
               qwevo tv delivers premium IPTV with 26,000+ live channels, 100,000+
               VOD titles, and instant activation. Stream on every device with
               anti-freeze technology and 24/7 support.
-            </motion.p>
+            </p>
 
-            <motion.div
-              className="mt-8 flex flex-col gap-3 sm:flex-row"
-              variants={fadeUp}
-              custom={3}
-            >
-              <motion.a
+            <div className="animate-fade-in-up mt-8 flex flex-col gap-3 sm:flex-row" style={{ "--i": 3 } as React.CSSProperties}>
+              <a
                 href={whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-2xl bg-gradient-to-r from-[#14B8FF] to-[#2563EB] px-8 py-4 text-sm font-bold text-white shadow-lg shadow-[#14B8FF]/20 transition-all hover:shadow-xl hover:shadow-[#14B8FF]/30"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
+                className="group relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-2xl bg-gradient-to-r from-[#14B8FF] to-[#2563EB] px-8 py-4 text-sm font-bold text-white shadow-lg shadow-[#14B8FF]/20 transition-all duration-200 hover:shadow-xl hover:shadow-[#14B8FF]/30 hover:scale-[1.03] active:scale-[0.97]"
               >
                 <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full transition-transform duration-700 group-hover:translate-x-full" />
                 <Play className="h-4 w-4 fill-current" />
                 <span className="relative">Get Trial</span>
                 <ArrowRight className="relative h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </motion.a>
+              </a>
               <Link
                 href="/pricing"
-                className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/15 bg-white/[0.04] px-8 py-4 text-sm font-semibold text-white backdrop-blur-md transition-all hover:border-white/30 hover:bg-white/[0.08]"
+                className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/15 bg-white/[0.04] px-8 py-4 text-sm font-semibold text-white backdrop-blur-md transition-all duration-200 hover:border-white/30 hover:bg-white/[0.08] hover:scale-[1.03] active:scale-[0.97]"
               >
                 View Plans
               </Link>
-            </motion.div>
+            </div>
 
-            <motion.div
-              className="mt-8 sm:mt-10 grid grid-cols-2 gap-2 sm:gap-3"
-              variants={fadeUp}
-              custom={4}
-            >
+            <div className="animate-fade-in-up mt-8 sm:mt-10 grid grid-cols-2 gap-2 sm:gap-3" style={{ "--i": 4 } as React.CSSProperties}>
               {features.map((f) => {
                 const Icon = f.icon;
                 return (
                   <div
                     key={f.label}
-                    className="group rounded-2xl border border-white/[0.06] bg-white/[0.03] p-3 sm:p-4 backdrop-blur-sm transition-all hover:border-[#14B8FF]/20 hover:bg-[#14B8FF]/5 hover:shadow-lg hover:shadow-[#14B8FF]/5"
+                    className="group rounded-2xl border border-white/[0.06] bg-white/[0.03] p-3 sm:p-4 backdrop-blur-sm transition-all duration-200 hover:border-[#14B8FF]/20 hover:bg-[#14B8FF]/5 hover:shadow-lg hover:shadow-[#14B8FF]/5 hover:scale-[1.02]"
                   >
-                    <div className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-[#14B8FF]/10 transition-transform group-hover:scale-110 group-hover:bg-[#14B8FF]/15">
+                    <div className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-[#14B8FF]/10 transition-transform duration-200 group-hover:scale-110 group-hover:bg-[#14B8FF]/15">
                       <Icon className="h-4 w-4 sm:h-5 sm:w-5 text-[#14B8FF]" />
                     </div>
                     <p className="mt-3 text-base font-bold text-white">
@@ -250,15 +206,10 @@ export default function Hero() {
                   </div>
                 );
               })}
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
-          <motion.div
-            className="hidden lg:block"
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-          >
+          <div className="hidden animate-fade-in-right lg:block">
             <div className="group relative w-64">
               <div className="absolute -inset-6 rounded-3xl bg-gradient-to-br from-[#14B8FF]/5 to-[#2563EB]/5 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
 
@@ -323,65 +274,41 @@ export default function Hero() {
                 Updated in real-time
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
 
-      <motion.div
-        className="section-shell relative z-10 -mt-12 sm:-mt-16 pb-10"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-30px" }}
-        variants={stagger}
-      >
-        <motion.div
-          className="overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.03] px-5 py-6 sm:px-6 sm:py-7 md:px-10 backdrop-blur-2xl sm:rounded-3xl"
-          variants={fadeUp}
-          custom={0}
-        >
-          <motion.p
-            className="text-center text-[10px] font-semibold uppercase tracking-[0.24em] text-slate-400/60"
-            variants={fadeUp}
-            custom={1}
-          >
+      <div className="section-shell relative z-10 -mt-12 sm:-mt-16 pb-10">
+        <div className="overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.03] px-5 py-6 sm:px-6 sm:py-7 md:px-10 backdrop-blur-2xl sm:rounded-3xl animate-fade-in-up" style={{ "--i": 5 } as React.CSSProperties}>
+          <p className="text-center text-[10px] font-semibold uppercase tracking-[0.24em] text-slate-400/60" style={{ "--i": 6 } as React.CSSProperties}>
             Works on all your favorite devices
-          </motion.p>
+          </p>
 
-          <motion.div
-            className="mt-5 flex flex-wrap justify-center gap-2 sm:gap-3"
-            variants={fadeUp}
-            custom={2}
-          >
+          <div className="mt-5 flex flex-wrap justify-center gap-2 sm:gap-3" style={{ "--i": 7 } as React.CSSProperties}>
             {devices.map((device) => {
               const Icon = device.icon;
               return (
-                <motion.div
+                <div
                   key={device.name}
-                  className="flex items-center gap-2 rounded-xl border border-white/[0.06] bg-white/[0.02] px-3 py-2 backdrop-blur-sm transition-all hover:border-[#14B8FF]/20 hover:bg-[#14B8FF]/5"
-                  whileHover={{ scale: 1.04, y: -2 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  className="flex items-center gap-2 rounded-xl border border-white/[0.06] bg-white/[0.02] px-3 py-2 backdrop-blur-sm transition-all duration-200 hover:border-[#14B8FF]/20 hover:bg-[#14B8FF]/5 hover:scale-[1.04] hover:-translate-y-0.5"
                 >
                   <Icon className="h-3.5 w-3.5 text-white/30 sm:h-4 sm:w-4" />
                   <span className="text-xs font-medium text-white/50 sm:text-sm">
                     {device.name}
                   </span>
-                </motion.div>
+                </div>
               );
             })}
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
-        <motion.div
-          className="mt-4 flex items-center justify-center gap-1"
-          variants={fadeUp}
-          custom={3}
-        >
+        <div className="mt-4 flex items-center justify-center gap-1">
           <CheckCircle2 className="h-3 w-3 text-[#14B8FF]" />
           <span className="text-xs text-slate-500">
             Free setup &bull; 24/7 support &bull; Instant activation
           </span>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
 
       <div className="absolute bottom-6 left-1/2 -z-10 -translate-x-1/2">
         <div className="animate-soft-bounce flex flex-col items-center gap-1.5">
