@@ -2,7 +2,7 @@
 
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
-import { blogPosts } from "@/lib/posts";
+import { postPreviews } from "@/lib/postPreviews";
 import { Calendar, ChevronLeft, ChevronRight, Clock3, Search, TrendingUp, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -46,13 +46,13 @@ export default function BlogPage() {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const featured = blogPosts[0];
-  const trending = [...blogPosts].sort(
+  const featured = postPreviews[0];
+  const trending = [...postPreviews].sort(
     (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
   ).slice(0, 4);
 
   const filteredPosts = useMemo(() => {
-    let filtered = blogPosts;
+    let filtered = postPreviews;
 
     if (activeCategory) {
       filtered = filtered.filter((p) => {

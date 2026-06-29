@@ -1,9 +1,9 @@
-import { blogPosts } from "@/lib/posts";
+import { postPreviews } from "@/lib/postPreviews";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-const featuredPosts = [...blogPosts]
+const featuredPosts = [...postPreviews]
   .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
   .slice(0, 3);
 

@@ -1,9 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Calendar, Clock3, User } from "lucide-react";
-import type { BlogPost } from "@/lib/posts";
+import type { BlogPostPreview } from "@/lib/postPreviews";
 
-export default function BlogCard({ post, featured }: { post: BlogPost; featured?: boolean }) {
+export default function BlogCard({ post, featured }: { post: BlogPostPreview; featured?: boolean }) {
   return (
     <Link
       href={`/blog/${post.id}`}

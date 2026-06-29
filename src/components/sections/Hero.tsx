@@ -1,5 +1,3 @@
-"use client";
-
 import {
   ArrowRight,
   CheckCircle2,
@@ -15,9 +13,10 @@ import {
   Users,
   Zap,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
 import { SITE_NAME, WHATSAPP_URL } from "@/constants/content";
+import HeroCounter from "./HeroCounter";
 
 const features = [
   { icon: Radio, label: "25,000+", desc: "Live channels worldwide" },
@@ -44,49 +43,12 @@ function GlowOrb({ className }: { className: string }) {
 }
 
 function LiveIndicator() {
-  const dotRef = useRef<HTMLSpanElement>(null);
-  const pingRef = useRef<HTMLSpanElement>(null);
-  useEffect(() => {
-    const t = setInterval(() => {
-      if (dotRef.current) dotRef.current.classList.toggle("opacity-100");
-      if (dotRef.current) dotRef.current.classList.toggle("opacity-40");
-      if (pingRef.current) pingRef.current.classList.toggle("opacity-75");
-      if (pingRef.current) pingRef.current.classList.toggle("opacity-0");
-    }, 1200);
-    return () => clearInterval(t);
-  }, []);
   return (
     <span className="relative flex h-2 w-2">
-      <span
-        ref={dotRef}
-        className="absolute inline-flex h-full w-full rounded-full bg-[#22D3EE] opacity-100 transition-opacity duration-500"
-      />
-      <span
-        ref={pingRef}
-        className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#22D3EE] opacity-75 transition-opacity duration-500"
-      />
+      <span className="absolute inline-flex h-full w-full rounded-full bg-[#22D3EE] animate-live-dot" />
+      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#22D3EE] animate-live-ping" />
     </span>
   );
-}
-
-function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    let rafId: number;
-    const startTime = performance.now();
-    const duration = 2000;
-    function tick(now: number) {
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      el.textContent = `${Math.floor(progress * target).toLocaleString()}${suffix}`;
-      if (progress < 1) rafId = requestAnimationFrame(tick);
-    }
-    rafId = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafId);
-  }, [target, suffix]);
-  return <span ref={ref}>0{suffix}</span>;
 }
 
 export default function Hero() {
@@ -100,14 +62,17 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen overflow-hidden bg-[#050816]"
     >
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: "url('/images/hero-bg-new.webp')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
+      <div className="absolute inset-0">
+        <Image
+          src="/images/hero-bg-new.webp"
+          alt=""
+          fill
+          priority
+          fetchPriority="high"
+          sizes="100vw"
+          className="object-cover"
+        />
+      </div>
 
       <div className="absolute inset-0 bg-gradient-to-b from-[#050816]/60 via-[#050816]/40 to-[#050816]/90" />
       <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent" />
@@ -152,7 +117,7 @@ export default function Hero() {
               </div>
             </div>
 
-            <h1 className="animate-fade-in-up mt-5 text-[clamp(2rem,7vw,4.5rem)] font-black leading-[1.04] tracking-tight text-white" style={{ "--i": 1 } as React.CSSProperties}>
+            <h1 className="mt-5 text-[clamp(2rem,7vw,4.5rem)] font-black leading-[1.04] tracking-tight text-white">
               <span className="bg-gradient-to-r from-[#22D3EE] via-[#14B8FF] to-[#2563EB] bg-clip-text text-transparent">
                 qwevo tv — Live TV, Sports & Movies
               </span>
@@ -228,7 +193,7 @@ export default function Hero() {
                     </p>
                     <p className="mt-1 flex items-baseline gap-1 text-2xl font-black text-white tabular-nums">
                       <Users className="mr-1 h-4 w-4 text-[#14B8FF]" />
-                      <Counter target={viewers} />
+                      <HeroCounter target={viewers} />
                       <span className="text-sm font-medium text-slate-400">
                         viewers
                       </span>

@@ -1,87 +1,25 @@
-import dynamic from "next/dynamic";
-import Footer from "@/components/layout/Footer";
-import Navbar from "@/components/layout/Navbar";
-import Hero from "@/components/sections/Hero";
+import { Accordion } from "@/components/ui/Accordion";
 import { FEATURE_CARDS, FAQ_ITEMS, PRICING_PLANS, SITE_NAME, WHATSAPP_URL } from "@/constants/content";
-import { ArrowRight, CheckCircle2, MonitorPlay, ShieldCheck, Smartphone, Sparkles, Tv2 } from "lucide-react";
+import {
+  ArrowRight,
+  CheckCircle2,
+  MonitorPlay,
+  ShieldCheck,
+  Smartphone,
+  Sparkles,
+  Tv2,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-
-const BlogPreview = dynamic(() => import("@/components/sections/BlogPreview"), {
-  loading: () => <div className="section-shell py-12 md:py-20"><div className="h-64 animate-pulse rounded-[2rem] bg-white/5" /></div>,
-});
-
-const MoviesCarousel = dynamic(() => import("@/components/sections/MoviesCarousel"), {
-  loading: () => <div className="section-shell py-6 md:py-10"><div className="h-48 animate-pulse rounded-[2rem] bg-white/5" /></div>,
-});
-
-const Accordion = dynamic(() => import("@/components/ui/Accordion").then(m => m.Accordion));
-
-const serviceSchema = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": "https://www.qwevotv.pro/#organization",
-      name: SITE_NAME,
-      url: "https://www.qwevotv.pro",
-      logo: "https://www.qwevotv.pro/icon-512x512.png",
-      contactPoint: {
-        "@type": "ContactPoint",
-        contactType: "customer support",
-        availableLanguage: ["English"],
-        url: WHATSAPP_URL,
-      },
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://www.qwevotv.pro/#website",
-      name: SITE_NAME,
-      url: "https://www.qwevotv.pro",
-      publisher: { "@id": "https://www.qwevotv.pro/#organization" },
-    },
-    {
-      "@type": "Service",
-      "@id": "https://www.qwevotv.pro/#service",
-      name: "qwevo tv premium IPTV service",
-      provider: { "@id": "https://www.qwevotv.pro/#organization" },
-      serviceType: "IPTV streaming subscription",
-      areaServed: "Worldwide",
-      description: "Premium IPTV streaming with live TV, sports, movies, and support across major devices.",
-      offers: PRICING_PLANS.map((plan) => ({
-        "@type": "Offer",
-        name: `${plan.duration} ${plan.name}`,
-        price: plan.price,
-        priceCurrency: "EUR",
-        availability: "https://schema.org/InStock",
-      })),
-    },
-    {
-      "@type": "FAQPage",
-      "@id": "https://www.qwevotv.pro/#faq",
-      mainEntity: FAQ_ITEMS.map((item) => ({
-        "@type": "Question",
-        name: item.question,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: item.answer,
-        },
-      })),
-    },
-  ],
-};
+import BlogPreview from "./BlogPreview";
+import Footer from "@/components/layout/Footer";
+import MoviesCarousel from "./MoviesCarousel";
 
 const sectionIcons = [Tv2, MonitorPlay, ShieldCheck, Sparkles];
 
-export default function Home() {
-
+export default function BelowFoldContent() {
   return (
-    <main className="min-h-screen bg-background text-white overflow-x-hidden">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
-      <Navbar />
-
-      <Hero />
-
+    <>
       {/* --- PRICING SECTION --- */}
       <section id="pricing" className="section-shell py-12 md:py-20">
         <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
@@ -177,7 +115,6 @@ export default function Home() {
         <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {FEATURE_CARDS.map((feature, index) => {
             const Icon = sectionIcons[index % sectionIcons.length];
-
             return (
               <article key={feature.title} className="surface-panel p-6">
                 <Icon className="h-6 w-6 text-primary" />
@@ -537,6 +474,6 @@ export default function Home() {
       </section>
 
       <Footer />
-    </main>
+    </>
   );
 }

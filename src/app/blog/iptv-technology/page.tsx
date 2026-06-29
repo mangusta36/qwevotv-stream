@@ -1,6 +1,6 @@
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
-import { blogPosts } from "@/lib/posts";
+import { postPreviews } from "@/lib/postPreviews";
 import { Calendar, Clock3, User } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -70,7 +70,7 @@ const iptvTechSchema = {
 };
 
 export default function IptvTechnologyPage() {
-  const categoryPosts = blogPosts.filter((p) => p.category === "IPTV Technology");
+  const categoryPosts = postPreviews.filter((p) => p.category === "IPTV Technology");
 
   return (
     <main className="min-h-screen bg-background text-white">

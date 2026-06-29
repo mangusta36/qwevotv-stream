@@ -1,5 +1,4 @@
 /** @type {import('next').NextConfig} */
-
 const nextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
@@ -32,10 +31,4 @@ const nextConfig = {
   },
 };
 
-export default process.env.ANALYZE === 'true'
-  ? (await import('@next/bundle-analyzer')).default({
-      enabled: true,
-      openAnalyzer: false,
-      analyzerMode: 'static',
-    })(nextConfig)
-  : nextConfig;
+export default nextConfig;
